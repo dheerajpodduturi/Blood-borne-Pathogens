@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bloodborne Pathogens Safety — Module 2</title>
+  <meta name="description" content="Module 2: Types of Bloodborne Pathogens (HBV, HCV, HIV) aligned to OSHA 29 CFR 1910.1030." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root{
+      --bg: #f6f8fb;
+      --panel: #ffffff;
+      --ink:#0f172a;
+      --muted:#475569;
+      --muted2:#64748b;
+      --border: rgba(15,23,42,.10);
+      --shadow: 0 10px 30px rgba(15,23,42,.08);
+      --shadow2: 0 14px 44px rgba(15,23,42,.10);
+
+      --teal:#0ea5a4;   /* brand */
+      --teal2:#0b8a89;  /* brand (enabled button) */
+      --tealSoft: rgba(14,165,164,.12);
+
+      --danger:#ef4444;
+      --warn:#f59e0b;
+
+      --r20: 20px;
+      --max: 1100px;
+      --navH: 70px;
+
+      --ease: cubic-bezier(.2,.8,.2,1);
+      --dur: 420ms;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(900px 450px at 40% 0%, rgba(14,165,164,.14), transparent 55%),
+        radial-gradient(700px 380px at 90% 4%, rgba(59,130,246,.10), transparent 55%),
+        var(--bg);
+      line-height:1.55;
+    }
+
+    a{color:var(--teal2); text-underline-offset:3px}
+    a:focus-visible, button:focus-visible, [role="button"]:focus-visible, input:focus-visible{
+      outline:3px solid rgba(14,165,164,.35);
+      outline-offset:3px;
+      border-radius:12px;
+    }
+
+    .sr-only{
+      position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+      overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+    }
+
+    /* top bar */
+    .topbar{
+      position:fixed; inset:0 0 auto 0;
+      height:var(--navH);
+      display:flex; align-items:center;
+      background: rgba(255,255,255,.82);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--border);
+      z-index:1000;
+    }
+    .topbar__inner{
+      width:min(var(--max), calc(100% - 32px));
+      margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+    }
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.02em}
+    .brand__dot{width:10px;height:10px;border-radius:999px;background:var(--teal);box-shadow:0 0 0 6px rgba(14,165,164,.12)}
+    .topbar__right{display:flex;align-items:center;gap:12px}
+    .pill{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:8px 12px;border-radius:999px;
+      border:1px solid rgba(14,165,164,.35);
+      background: rgba(14,165,164,.08);
+      color:#0b6f6e;font-weight:700;font-size:13px;white-space:nowrap
+    }
+    .avatar{
+      width:36px;height:36px;border-radius:999px;overflow:hidden;
+      border:2px solid rgba(14,165,164,.25);
+      box-shadow: var(--shadow);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), transparent 55%),
+        linear-gradient(135deg, rgba(14,165,164,.55), rgba(59,130,246,.35));
+      display:grid;place-items:center;font-weight:800;color:#0b3b3a
+    }
+
+    .progressStrip{position:fixed;top:0;left:0;right:0;height:4px;background:transparent;z-index:1001}
+    .progressStrip>span{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--teal),var(--teal2));transition:width 120ms linear}
+
+    main{padding-top:calc(var(--navH) + 26px);padding-bottom:70px}
+    .wrap{
+      width:min(var(--max), calc(100% - 32px));
+      margin:0 auto;
+      display:grid;
+      grid-template-columns: 1fr 260px;
+      gap:28px;
+      align-items:start;
+    }
+    @media (max-width:980px){
+      .wrap{grid-template-columns:1fr}
+      .sideNav{position:static!important}
+    }
+    section{margin:0 0 26px}
+    .hero{padding:22px 0 10px}
+
+    .chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+    .chip{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 12px;background:#fff;border:1px solid var(--border);
+      border-radius:999px;box-shadow:var(--shadow);
+      font-weight:600;font-size:13px;color:var(--muted)
+    }
+    .chip svg{width:16px;height:16px;color:var(--teal)}
+
+    h1{margin:0;font-size:clamp(34px, 4vw, 54px);letter-spacing:-.03em;line-height:1.08}
+    .lead{margin:14px 0 0;max-width:72ch;font-size:16.5px;color:var(--muted)}
+
+    .card{background:#fff;border:1px solid var(--border);border-radius:var(--r20);box-shadow:var(--shadow)}
+    .pad{padding:22px}
+
+    .videoFrame{
+      width:100%;
+      aspect-ratio:16/9;
+      border-radius:18px;
+      overflow:hidden;
+      background:#0b1220;
+      position:relative;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)
+    }
+    .videoFrame iframe{width:100%;height:100%;border:0}
+    .videoMeta{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding-top:14px;border-top:1px solid rgba(15,23,42,.08);
+      margin-top:14px;color:var(--muted2);font-size:13px
+    }
+    .checkboxLine{display:flex;align-items:center;gap:10px;color:var(--muted);font-weight:600}
+    .checkboxLine input{width:18px;height:18px;accent-color:var(--teal)}
+
+    .tag{
+      display:inline-flex;align-items:center;
+      padding:6px 12px;border-radius:999px;
+      font-weight:800;font-size:13px;background:rgba(14,165,164,.12);color:#0b6f6e
+    }
+    .qTitle{margin:10px 0 0;font-size:26px;line-height:1.15;letter-spacing:-.02em}
+
+    /* Knowledge check */
+    .options{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+    @media (max-width:720px){.options{grid-template-columns:1fr}}
+    .opt{
+      position:relative;
+      display:flex;gap:12px;align-items:center;
+      padding:16px;border-radius:14px;
+      border:1px solid rgba(15,23,42,.12);
+      background:#fff;box-shadow:0 6px 18px rgba(15,23,42,.05);
+      cursor:pointer;user-select:none;min-height:68px;
+      transition:transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+    }
+    .opt:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(15,23,42,.08)}
+    .opt[data-selected="true"]{
+      border-color: rgba(14,165,164,.95);
+      background: rgba(14,165,164,.08);
+      box-shadow: 0 14px 34px rgba(14,165,164,.14), 0 0 0 2px rgba(14,165,164,.28);
+    }
+    .opt[data-selected="true"]::before{
+      content:"";position:absolute;left:0;top:10px;bottom:10px;width:6px;border-radius:999px;
+      background: linear-gradient(180deg, var(--teal), var(--teal2));
+    }
+    .optLetter{
+      width:34px;height:34px;border-radius:999px;
+      background: rgba(15,23,42,.05);
+      display:grid;place-items:center;
+      font-weight:900;color:var(--muted);
+      flex:0 0 auto;
+    }
+    .opt[data-selected="true"] .optLetter{background:var(--teal2);color:#fff;box-shadow:0 10px 20px rgba(11,138,137,.18)}
+    .optText{font-weight:700;color:var(--ink)}
+
+    /* Buttons: disabled until answered; enabled = brand green */
+    .btnPrimary{
+      width:100%;
+      margin-top:18px;
+      border:0;border-radius:10px;
+      padding:14px 16px;
+      background: rgba(14,165,164,.25);
+      color:#fff;
+      font-weight:900;
+      font-size:15px;
+      cursor:not-allowed;
+      transition: background 220ms var(--ease), transform 220ms var(--ease), filter 220ms var(--ease);
+    }
+    .btnPrimary.is-enabled{background: var(--teal2);cursor:pointer}
+    .btnPrimary.is-enabled:hover{filter:brightness(1.03);transform:translateY(-1px)}
+    .btnPrimary:disabled{opacity:1}
+
+    .feedback{
+      margin-top:14px;padding:12px 14px;border-radius:12px;
+      border:1px solid rgba(15,23,42,.10);
+      background: rgba(15,23,42,.03);
+      color: var(--muted);
+      font-weight:650;
+    }
+    .feedback.good{border-color: rgba(34,197,94,.25);background: rgba(34,197,94,.10);color:#166534}
+    .feedback.bad{border-color: rgba(239,68,68,.25);background: rgba(239,68,68,.10);color:#7f1d1d}
+
+    /* Activity */
+    .activityGrid{
+      display:grid;
+      grid-template-columns:260px 1fr 1fr;
+      gap:22px;
+      margin-top:16px;
+      align-items:start;
+    }
+    @media (max-width:980px){ .activityGrid{grid-template-columns:1fr} }
+    .itemsTitle{margin:6px 0 10px;font-size:14px;color:var(--muted);font-weight:900}
+    .itemList{display:grid;gap:12px}
+    .dndItem{
+      display:flex;align-items:center;gap:12px;
+      padding:14px 14px;border-radius:12px;
+      border:1px solid rgba(15,23,42,.12);
+      background:#fff;box-shadow:0 8px 22px rgba(15,23,42,.06);
+      cursor:grab;user-select:none;
+    }
+    .dndItem:active{cursor:grabbing}
+    .grip{
+      width:34px;height:34px;border-radius:10px;
+      background: rgba(15,23,42,.05);
+      display:grid;place-items:center;
+      color:var(--muted2);
+      font-weight:900;line-height:1;flex:0 0 auto;
+    }
+    .dndText{font-weight:800;color:var(--ink);font-size:14px;line-height:1.2}
+
+    .dropZone{
+      border:2px dashed rgba(100,116,139,.45);
+      border-radius:14px;
+      min-height:220px;
+      padding:14px;background:transparent;
+      transition:border-color 180ms var(--ease), background 180ms var(--ease), box-shadow 180ms var(--ease);
+    }
+    .dropZone h4{margin:6px 0 12px;font-size:14px;color:var(--ink);font-weight:900}
+    .dropZone.dragOver{
+      border-color: rgba(14,165,164,.85);
+      background: rgba(14,165,164,.06);
+      box-shadow: 0 0 0 4px rgba(14,165,164,.10);
+    }
+
+    /* Side nav */
+    .sideNav{position:sticky;top:calc(var(--navH) + 18px)}
+    .sideCard{
+      border-radius:18px;
+      background: rgba(255,255,255,.92);
+      border:1px solid rgba(15,23,42,.10);
+      box-shadow: var(--shadow2);
+      padding:12px;
+    }
+    .navList{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+    .navItem a{
+      display:flex;align-items:center;gap:10px;
+      padding:10px 10px;border-radius:12px;
+      text-decoration:none;color:var(--muted);
+      font-weight:800;font-size:13px;
+    }
+    .navItem a:hover{background: rgba(14,165,164,.08); color:#0b6f6e}
+    .navItem a[aria-current="true"]{background: rgba(14,165,164,.10); color:#0b6f6e}
+    .bullet{width:8px;height:8px;border-radius:999px;background: rgba(100,116,139,.35)}
+    .navItem a[aria-current="true"] .bullet{background: var(--teal); box-shadow: 0 0 0 6px rgba(14,165,164,.12)}
+
+    .completeCard{
+      text-align:center;
+      padding:28px 22px;
+      background: linear-gradient(180deg, rgba(14,165,164,.10), rgba(14,165,164,.02));
+      border:1px solid rgba(14,165,164,.28);
+      border-radius:20px;
+      box-shadow: var(--shadow2);
+    }
+    .badgeRound{
+      width:60px;height:60px;border-radius:999px;margin:0 auto 10px;
+      background: rgba(14,165,164,.16);
+      border:1px solid rgba(14,165,164,.30);
+      display:grid;place-items:center;color:var(--teal2)
+    }
+    .completeCard h3{margin:8px 0 8px;font-size:40px;letter-spacing:-.03em}
+    .completeCard p{margin:0 auto;max-width:65ch;color:var(--muted);font-weight:650}
+    .xpRow{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:16px;flex-wrap:wrap}
+    .xpPill{
+      display:inline-flex;align-items:center;gap:8px;
+      background: rgba(14,165,164,.15);
+      border:1px solid rgba(14,165,164,.25);
+      border-radius:12px;padding:10px 12px;font-weight:900;color:#0b6f6e
+    }
+    .barWrap{width:min(520px, 100%);margin:16px auto 0}
+    .bar{height:10px;border-radius:999px;background: rgba(15,23,42,.10);overflow:hidden}
+    .bar>span{display:block;height:100%;width:0%;background: linear-gradient(90deg, var(--teal), var(--teal2));transition: width var(--dur) var(--ease)}
+    .continueBtn{
+      margin-top:18px;
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:12px 16px;border-radius:12px;
+      border:1px solid rgba(15,23,42,.10);
+      background: var(--teal2);
+      color:#fff;font-weight:900;text-decoration:none;
+      box-shadow: 0 10px 26px rgba(14,165,164,.22);
+    }
+
+    .reveal{opacity:0;transform:translateY(14px);transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease)}
+    .reveal.in{opacity:1;transform:none}
+  </style>
+</head>
+
+<body>
+  <div class="progressStrip" aria-hidden="true"><span id="progressBar"></span></div>
+
+  <header class="topbar" role="banner">
+    <div class="topbar__inner">
+      <div class="brand" aria-label="Course title">
+        <span class="brand__dot" aria-hidden="true"></span>
+        <span>Bloodborne Pathogens Safety</span>
+      </div>
+      <div class="topbar__right">
+        <div class="pill" aria-live="polite" aria-atomic="true"><span id="pct">0%</span> Complete</div>
+        <div class="avatar" aria-label="Learner profile" title="Learner"><span aria-hidden="true">🧬</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" role="main">
+    <div class="wrap">
+      <div>
+        <!-- HERO -->
+        <section class="hero reveal" id="intro" data-section="Intro">
+          <div class="chips" aria-label="Course metadata">
+            <div class="chip">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="currentColor" stroke-width="2"/>
+              </svg>
+              <span>~12 min</span>
+            </div>
+            <div class="chip">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M16 11a4 4 0 1 0-8 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M4 20c1.6-3 4.3-5 8-5s6.4 2 8 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <span>Module 2 of 6</span>
+            </div>
+          </div>
+
+          <h1>Module 2: Types of Bloodborne Pathogens</h1>
+          <p class="lead">
+            In this module, you’ll learn the major bloodborne pathogens of concern in healthcare settings — Hepatitis B (HBV),
+            Hepatitis C (HCV), and Human Immunodeficiency Virus (HIV) — including key risk facts and why prevention matters.
+          </p>
+        </section>
+
+        <!-- VIDEO -->
+        <section class="reveal" id="video" data-section="Video">
+          <div class="card pad">
+            <div class="videoFrame" aria-label="Training video">
+              <iframe
+                title="Bloodborne Pathogens Overview Video"
+                src="https://www.youtube.com/embed/2R4n8k7tY4o"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+            <h2 style="margin:16px 0 6px; letter-spacing:-.02em;">Meet the Big Three: HBV, HCV, HIV</h2>
+            <div class="videoMeta">
+              <span aria-label="Video duration">4:32</span>
+              <label class="checkboxLine"><input id="markVideo" type="checkbox" /> Mark as complete</label>
+            </div>
+          </div>
+        </section>
+
+        <!-- READING -->
+        <section class="reveal" id="reading" data-section="Reading">
+          <div class="card pad">
+            <span class="tag">Reading</span>
+            <h2 class="qTitle">What makes these pathogens important?</h2>
+            <p class="lead" style="margin-top:10px">
+              OSHA’s Bloodborne Pathogens Standard focuses on occupational exposure to human blood and other potentially infectious materials (OPIM).
+              HBV, HCV, and HIV are emphasized because they can be transmitted through blood exposure and can lead to serious disease.
+            </p>
+
+            <div style="display:grid; gap:12px; margin-top:14px">
+              <div style="padding:14px;border-radius:14px;border:1px solid rgba(15,23,42,.10);background:rgba(14,165,164,.06)">
+                <b>HBV (Hepatitis B)</b><br/>
+                <span style="color:var(--muted);font-weight:650">
+                  Vaccine-preventable. Can survive on surfaces for days under certain conditions. Can cause chronic liver disease.
+                </span>
+              </div>
+
+              <div style="padding:14px;border-radius:14px;border:1px solid rgba(15,23,42,.10);background:rgba(14,165,164,.06)">
+                <b>HCV (Hepatitis C)</b><br/>
+                <span style="color:var(--muted);font-weight:650">
+                  No vaccine. Often asymptomatic at first but can lead to chronic infection and liver damage.
+                </span>
+              </div>
+
+              <div style="padding:14px;border-radius:14px;border:1px solid rgba(15,23,42,.10);background:rgba(14,165,164,.06)">
+                <b>HIV</b><br/>
+                <span style="color:var(--muted);font-weight:650">
+                  Attacks immune system. Post-exposure prophylaxis (PEP) can be time-sensitive after an exposure.
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- KNOWLEDGE CHECK -->
+        <section class="reveal" id="knowledge-check" data-section="Knowledge Check">
+          <div class="card pad">
+            <span class="tag">Knowledge Check</span>
+            <h2 class="qTitle">Which bloodborne pathogen has a widely available and effective vaccine?</h2>
+
+            <div class="options" role="radiogroup" aria-label="Question options" data-qid="q1">
+              <div class="opt" role="radio" tabindex="0" aria-checked="false" data-opt="A">
+                <div class="optLetter" aria-hidden="true">A</div>
+                <div class="optText">Hepatitis C (HCV)</div>
+              </div>
+              <div class="opt" role="radio" tabindex="0" aria-checked="false" data-opt="B">
+                <div class="optLetter" aria-hidden="true">B</div>
+                <div class="optText">Hepatitis B (HBV)</div>
+              </div>
+              <div class="opt" role="radio" tabindex="0" aria-checked="false" data-opt="C">
+                <div class="optLetter" aria-hidden="true">C</div>
+                <div class="optText">HIV</div>
+              </div>
+              <div class="opt" role="radio" tabindex="0" aria-checked="false" data-opt="D">
+                <div class="optLetter" aria-hidden="true">D</div>
+                <div class="optText">All of the above</div>
+              </div>
+            </div>
+
+            <button class="btnPrimary" id="submitQ1" type="button" disabled>Submit Answer</button>
+            <div class="feedback" id="fbQ1" role="status" aria-live="polite" hidden></div>
+          </div>
+        </section>
+
+        <!-- ACTIVITY -->
+        <section class="reveal" id="activity" data-section="Activity">
+          <div class="card pad">
+            <span class="tag">Interactive Activity</span>
+            <h2 class="qTitle" style="margin-top:10px;">Match each fact to the correct pathogen</h2>
+            <p class="lead" style="margin-top:8px;">
+              Drag items into the correct category. “Check My Answers” will enable once you place all items.
+              <span class="sr-only">Keyboard: focus an item then press H (HBV), C (HCV), I (HIV), or P (back to Items).</span>
+            </p>
+
+            <div class="activityGrid" aria-label="Classification activity">
+              <div>
+                <div class="itemsTitle">Items to Sort</div>
+                <div class="itemList" id="pool" aria-label="Items to sort"></div>
+              </div>
+
+              <div class="dropZone" id="zoneHBV" aria-label="HBV drop zone">
+                <h4>HBV</h4>
+                <div class="itemList" id="bucketHBV"></div>
+              </div>
+
+              <div class="dropZone" id="zoneHCV" aria-label="HCV drop zone">
+                <h4>HCV</h4>
+                <div class="itemList" id="bucketHCV"></div>
+              </div>
+
+              <div class="dropZone" id="zoneHIV" aria-label="HIV drop zone" style="grid-column: 2 / span 2;">
+                <h4>HIV</h4>
+                <div class="itemList" id="bucketHIV"></div>
+              </div>
+            </div>
+
+            <button class="btnPrimary" id="checkActivity" type="button" disabled>Check My Answers</button>
+            <div class="feedback" id="fbAct" role="status" aria-live="polite" hidden></div>
+          </div>
+        </section>
+
+        <!-- COMPLETE -->
+        <section class="reveal" id="complete" data-section="Complete">
+          <div class="completeCard" role="region" aria-label="Module completion">
+            <div class="badgeRound" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2 20 5v7c0 5-3.6 9-8 10-4.4-1-8-5-8-10V5l8-3Z" stroke="currentColor" stroke-width="2"/>
+                <path d="m8 12 2.2 2.2L16 8.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Module 2 Complete!</h3>
+            <p>You’ve identified the three primary pathogens emphasized in BBP training and why each matters to occupational safety.</p>
+
+            <div class="xpRow">
+              <div class="xpPill"><span aria-hidden="true">🏆</span><span>+ 150 XP</span></div>
+              <div style="color:var(--muted); font-weight:750;">Module 2 of 6 completed</div>
+            </div>
+
+            <div class="barWrap" aria-label="Module progress">
+              <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="33">
+                <span id="moduleBar"></span>
+              </div>
+              <div style="margin-top:8px; color:var(--muted); font-weight:750;">33% of course complete</div>
+            </div>
+
+            <a class="continueBtn" href="module-3.html" id="continueBtn">
+              Continue to Module 3: Transmission & Exposure Routes <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </section>
+      </div>
+
+      <!-- SIDE NAV -->
+      <aside class="sideNav" aria-label="Lesson navigation">
+        <div class="sideCard">
+          <ul class="navList" id="lessonNav">
+            <li class="navItem"><a href="#intro" data-link="Intro"><span class="bullet" aria-hidden="true"></span>Intro</a></li>
+            <li class="navItem"><a href="#video" data-link="Video"><span class="bullet" aria-hidden="true"></span>Video</a></li>
+            <li class="navItem"><a href="#reading" data-link="Reading"><span class="bullet" aria-hidden="true"></span>Reading</a></li>
+            <li class="navItem"><a href="#knowledge-check" data-link="Knowledge Check"><span class="bullet" aria-hidden="true"></span>Knowledge<br/>Check</a></li>
+            <li class="navItem"><a href="#activity" data-link="Activity"><span class="bullet" aria-hidden="true"></span>Activity</a></li>
+            <li class="navItem"><a href="#complete" data-link="Complete"><span class="bullet" aria-hidden="true"></span>Complete</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    /***********************
+     * Tracking (Standalone)
+     ***********************/
+    const STORE_KEY = "bbp_module2_tracking";
+    const state = loadState();
+
+    function loadState(){
+      try{
+        return JSON.parse(localStorage.getItem(STORE_KEY)) || {
+          startedAt: Date.now(),
+          sectionTimeMs: {},
+          currentSection: null,
+          sectionEnteredAt: null,
+          interactions: [],
+          quiz: { q1: { attempts:0, selected:null, correct:null } },
+          activity: { checked:false, correctCount:0, total:0, placement:{} }
+        };
+      }catch(e){
+        return { startedAt: Date.now(), sectionTimeMs:{}, currentSection:null, sectionEnteredAt:null, interactions:[], quiz:{ q1:{attempts:0, selected:null, correct:null } }, activity:{checked:false, correctCount:0, total:0, placement:{}} };
+      }
+    }
+    function saveState(){ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }
+    function logInteraction(type, id, meta={}){
+      state.interactions.push({ t: Date.now(), type, id, meta });
+      saveState();
+    }
+
+    /* Scroll progress */
+    const progressBar = document.getElementById("progressBar");
+    const pctEl = document.getElementById("pct");
+    function updateProgress(){
+      const doc = document.documentElement;
+      const scrollTop = doc.scrollTop || document.body.scrollTop;
+      const scrollHeight = doc.scrollHeight - doc.clientHeight;
+      const p = scrollHeight > 0 ? Math.min(1, Math.max(0, scrollTop / scrollHeight)) : 0;
+      const pct = Math.round(p * 100);
+      progressBar.style.width = pct + "%";
+      pctEl.textContent = pct + "%";
+      return pct;
+    }
+    window.addEventListener("scroll", updateProgress, { passive:true });
+    updateProgress();
+
+    /* Sections time + side nav highlight */
+    const sections = [...document.querySelectorAll("section[data-section]")];
+    const navLinks = [...document.querySelectorAll("#lessonNav a")];
+    function setCurrentNav(sectionName){
+      navLinks.forEach(a => a.setAttribute("aria-current", a.dataset.link === sectionName ? "true" : "false"));
+    }
+    function commitSectionTime(nextSectionName){
+      const now = Date.now();
+      if(state.currentSection && state.sectionEnteredAt){
+        const delta = now - state.sectionEnteredAt;
+        state.sectionTimeMs[state.currentSection] = (state.sectionTimeMs[state.currentSection] || 0) + delta;
+      }
+      state.currentSection = nextSectionName;
+      state.sectionEnteredAt = now;
+      saveState();
+    }
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          const name = entry.target.getAttribute("data-section");
+          setCurrentNav(name);
+          if(state.currentSection !== name) commitSectionTime(name);
+        }
+      });
+    }, { threshold: 0.55 });
+    sections.forEach(s => io.observe(s));
+    window.addEventListener("beforeunload", () => commitSectionTime(state.currentSection || "Intro"));
+
+    /* Reveal animations */
+    const revealIO = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("in"); });
+    }, { threshold: 0.18 });
+    document.querySelectorAll(".reveal").forEach(el => revealIO.observe(el));
+
+    /* Global click tracking */
+    document.addEventListener("click", (e)=>{
+      const t = e.target.closest("button,a,input,[role='radio']");
+      if(!t) return;
+      const id = t.id || t.getAttribute("href") || t.getAttribute("data-opt") || t.getAttribute("aria-label") || t.textContent.trim().slice(0,30);
+      logInteraction("click", id, { tag: t.tagName.toLowerCase(), section: state.currentSection });
+    }, true);
+
+    /* Video toggle */
+    document.getElementById("markVideo").addEventListener("change", (e)=>{
+      logInteraction("video_complete_toggle", "markVideo", { checked: e.target.checked });
+    });
+
+    /***********************
+     * Knowledge Check
+     * Submit enabled only after selection; enabled = brand green
+     ***********************/
+    const q1Correct = "B";
+    const q1Opts = [...document.querySelectorAll(".options[data-qid='q1'] .opt")];
+    const submitQ1 = document.getElementById("submitQ1");
+    const fbQ1 = document.getElementById("fbQ1");
+
+    submitQ1.disabled = true;
+    submitQ1.classList.remove("is-enabled");
+
+    function selectQ1(optEl){
+      q1Opts.forEach(o=>{
+        o.dataset.selected = "false";
+        o.setAttribute("aria-checked","false");
+      });
+      optEl.dataset.selected = "true";
+      optEl.setAttribute("aria-checked","true");
+
+      state.quiz.q1.selected = optEl.dataset.opt;
+      saveState();
+
+      submitQ1.disabled = false;
+      submitQ1.classList.add("is-enabled");
+      logInteraction("quiz_select", "q1", { selected: state.quiz.q1.selected });
+    }
+
+    q1Opts.forEach(opt=>{
+      opt.addEventListener("click", ()=>selectQ1(opt));
+      opt.addEventListener("keydown", (e)=>{
+        if(e.key === "Enter" || e.key === " "){
+          e.preventDefault();
+          selectQ1(opt);
+        }
+      });
+    });
+
+    submitQ1.addEventListener("click", ()=>{
+      if(!state.quiz.q1.selected) return;
+
+      state.quiz.q1.attempts += 1;
+      const correct = state.quiz.q1.selected === q1Correct;
+      state.quiz.q1.correct = correct;
+      saveState();
+
+      fbQ1.hidden = false;
+      fbQ1.className = "feedback " + (correct ? "good" : "bad");
+      fbQ1.textContent = correct
+        ? "Correct. Hepatitis B (HBV) has a widely available, effective vaccine."
+        : "Not quite. HBV has a vaccine; HCV does not, and HIV does not have a preventive vaccine.";
+
+      logInteraction("quiz_submit", "q1", {
+        question: "Which pathogen has a vaccine?",
+        selected: state.quiz.q1.selected,
+        correct,
+        attempts: state.quiz.q1.attempts
+      });
+    });
+
+    /***********************
+     * Activity: drag & drop matching (HBV/HCV/HIV)
+     * Check enabled only when pool empty
+     ***********************/
+    const items = [
+      { id:"i1", text:"Vaccine is widely available", correct:"hbv" },
+      { id:"i2", text:"No vaccine; often becomes chronic", correct:"hcv" },
+      { id:"i3", text:"PEP is time-sensitive after exposure", correct:"hiv" },
+      { id:"i4", text:"Can survive on surfaces for days (under some conditions)", correct:"hbv" },
+      { id:"i5", text:"Frequently asymptomatic early", correct:"hcv" }
+    ];
+
+    const pool = document.getElementById("pool");
+    const bucketHBV = document.getElementById("bucketHBV");
+    const bucketHCV = document.getElementById("bucketHCV");
+    const bucketHIV = document.getElementById("bucketHIV");
+
+    const zoneHBV = document.getElementById("zoneHBV");
+    const zoneHCV = document.getElementById("zoneHCV");
+    const zoneHIV = document.getElementById("zoneHIV");
+
+    const checkActivity = document.getElementById("checkActivity");
+    const fbAct = document.getElementById("fbAct");
+
+    checkActivity.disabled = true;
+    checkActivity.classList.remove("is-enabled");
+
+    const placement = new Map(); // id -> pool|hbv|hcv|hiv
+    let draggingId = null;
+
+    function updateActivityAnsweredState(){
+      const remaining = pool.querySelectorAll(".dndItem").length;
+      const answered = remaining === 0;
+      checkActivity.disabled = !answered;
+      checkActivity.classList.toggle("is-enabled", answered);
+      checkActivity.setAttribute("aria-disabled", String(!answered));
+    }
+
+    function makeItemEl(it){
+      const el = document.createElement("div");
+      el.className = "dndItem";
+      el.setAttribute("data-item", it.id);
+      el.setAttribute("draggable", "true");
+      el.setAttribute("tabindex", "0");
+      el.setAttribute("role", "listitem");
+      el.setAttribute("aria-label", `${it.text}. Drag to classify. Keyboard: H HBV, C HCV, I HIV, P return.`);
+
+      const grip = document.createElement("div");
+      grip.className = "grip";
+      grip.setAttribute("aria-hidden", "true");
+      grip.textContent = "⋮⋮";
+
+      const txt = document.createElement("div");
+      txt.className = "dndText";
+      txt.textContent = it.text;
+
+      el.append(grip, txt);
+
+      el.addEventListener("dragstart", (e)=>{
+        draggingId = it.id;
+        e.dataTransfer.effectAllowed = "move";
+        try{ e.dataTransfer.setData("text/plain", it.id); }catch(_){}
+        logInteraction("activity_dragstart", it.id, { from: placement.get(it.id) });
+      });
+
+      el.addEventListener("dragend", ()=>{
+        draggingId = null;
+        [zoneHBV, zoneHCV, zoneHIV].forEach(z=>z.classList.remove("dragOver"));
+      });
+
+      el.addEventListener("keydown", (e)=>{
+        const k = e.key.toLowerCase();
+        if(k === "h"){ e.preventDefault(); moveTo(it.id, "hbv"); }
+        if(k === "c"){ e.preventDefault(); moveTo(it.id, "hcv"); }
+        if(k === "i"){ e.preventDefault(); moveTo(it.id, "hiv"); }
+        if(k === "p"){ e.preventDefault(); moveTo(it.id, "pool"); }
+      });
+
+      return el;
+    }
+
+    function mountActivity(){
+      pool.innerHTML = "";
+      bucketHBV.innerHTML = "";
+      bucketHCV.innerHTML = "";
+      bucketHIV.innerHTML = "";
+      items.forEach(it=>{
+        placement.set(it.id, "pool");
+        pool.append(makeItemEl(it));
+      });
+      state.activity.total = items.length;
+      state.activity.placement = Object.fromEntries(placement.entries());
+      saveState();
+      updateActivityAnsweredState();
+    }
+    mountActivity();
+
+    function moveTo(id, where){
+      placement.set(id, where);
+      const node = document.querySelector(`[data-item="${id}"]`);
+      if(!node) return;
+
+      if(where === "pool") pool.append(node);
+      if(where === "hbv") bucketHBV.append(node);
+      if(where === "hcv") bucketHCV.append(node);
+      if(where === "hiv") bucketHIV.append(node);
+
+      state.activity.placement = Object.fromEntries(placement.entries());
+      saveState();
+
+      logInteraction("activity_move", id, { to: where });
+      updateActivityAnsweredState();
+    }
+
+    function setupDropZone(zoneEl, target){
+      zoneEl.addEventListener("dragover", (e)=>{
+        e.preventDefault();
+        zoneEl.classList.add("dragOver");
+        e.dataTransfer.dropEffect = "move";
+      });
+      zoneEl.addEventListener("dragleave", ()=>zoneEl.classList.remove("dragOver"));
+      zoneEl.addEventListener("drop", (e)=>{
+        e.preventDefault();
+        zoneEl.classList.remove("dragOver");
+        const id = (e.dataTransfer && e.dataTransfer.getData("text/plain")) || draggingId;
+        if(!id) return;
+        moveTo(id, target);
+        logInteraction("activity_drop", id, { to: target });
+      });
+    }
+
+    setupDropZone(zoneHBV, "hbv");
+    setupDropZone(zoneHCV, "hcv");
+    setupDropZone(zoneHIV, "hiv");
+
+    checkActivity.addEventListener("click", ()=>{
+      if(checkActivity.disabled) return;
+
+      let correctCount = 0;
+      items.forEach(it=>{
+        if(placement.get(it.id) === it.correct) correctCount++;
+      });
+
+      state.activity.checked = true;
+      state.activity.correctCount = correctCount;
+      state.activity.placement = Object.fromEntries(placement.entries());
+      saveState();
+
+      fbAct.hidden = false;
+      const ok = correctCount === items.length;
+      fbAct.className = "feedback " + (ok ? "good" : "bad");
+      fbAct.textContent = ok
+        ? "Great job — all facts are matched correctly."
+        : `You matched ${correctCount}/${items.length} correctly. Try again and review the quick descriptions above.`;
+
+      logInteraction("activity_check", "match-pathogens", { correctCount, total: items.length });
+    });
+
+    // Completion bar = 33%
+    document.getElementById("moduleBar").style.width = "33%";
+
+    // initial section state
+    if(!state.currentSection){
+      state.currentSection = "Intro";
+      state.sectionEnteredAt = Date.now();
+      saveState();
+    }
+    setCurrentNav(state.currentSection || "Intro");
+  </script>
+</body>
+</html>
