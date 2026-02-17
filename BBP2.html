@@ -969,147 +969,142 @@
     });
 
     /***********************
-     * Activity: Drag & Drop (NO buttons)
-     ***********************/
-    const items = [
-      { id:"i1", text:"Hand hygiene between patients", correct:"standard" },
-      { id:"i2", text:"N95 respirator use", correct:"transmission" },
-      { id:"i3", text:"Gloves for blood contact", correct:"standard" },
-      { id:"i4", text:"Negative pressure room", correct:"transmission" },
-      { id:"i5", text:"Safe sharps disposal", correct:"standard" }
-    ];
+     /***********************
+ * Activity: Drag & Drop (NO buttons)
+ ***********************/
+const items = [
+  { id:"i1", text:"Hand hygiene between patients", correct:"standard" },
+  { id:"i2", text:"N95 respirator use", correct:"transmission" },
+  { id:"i3", text:"Gloves for blood contact", correct:"standard" },
+  { id:"i4", text:"Negative pressure room", correct:"transmission" },
+  { id:"i5", text:"Safe sharps disposal", correct:"standard" }
+];
 
-    const pool = document.getElementById("pool");
-    const bucketStandard = document.getElementById("bucketStandard");
-    const bucketTransmission = document.getElementById("bucketTransmission");
-    const zoneStandard = document.getElementById("zoneStandard");
-    const zoneTransmission = document.getElementById("zoneTransmission");
+const pool = document.getElementById("pool");
+const bucketStandard = document.getElementById("bucketStandard");
+const bucketTransmission = document.getElementById("bucketTransmission");
+const zoneStandard = document.getElementById("zoneStandard");
+const zoneTransmission = document.getElementById("zoneTransmission");
 
-    const checkActivity = document.getElementById("checkActivity");
-    const fbAct = document.getElementById("fbAct");
+const checkActivity = document.getElementById("checkActivity");
+const fbAct = document.getElementById("fbAct");
 
-    const placement = new Map(); // id -> "pool"|"standard"|"transmission"
-    let draggingId = null;
+const placement = new Map(); // id -> "pool"|"standard"|"transmission"
+let draggingId = null;
 
-    function makeItemEl(it){
-      const el = document.createElement("div");
-      el.className = "dndItem";
-      el.setAttribute("data-item", it.id);
-      el.setAttribute("draggable", "true");
-      el.setAttribute("tabindex","0");
-      el.setAttribute("role","listitem");
-      el.setAttribute("aria-label", `${it.text}. Drag to classify. Keyboard: S for Standard, T for Transmission, P for Items.`);
+function makeItemEl(it){
+  const el = document.createElement("div");
+  el.className = "dndItem";
+  el.setAttribute("data-item", it.id);
+  el.setAttribute("draggable", "true");
+  el.setAttribute("role","listitem");
+  el.setAttribute("aria-label", it.text);
 
-      const grip = document.createElement("div");
-      grip.className = "grip";
-      grip.setAttribute("aria-hidden","true");
-      grip.textContent = "⋮⋮";
+  const grip = document.createElement("div");
+  grip.className = "grip";
+  grip.setAttribute("aria-hidden","true");
+  grip.textContent = "⋮⋮";
 
-      const txt = document.createElement("div");
-      txt.className = "dndText";
-      txt.textContent = it.text;
+  const txt = document.createElement("div");
+  txt.className = "dndText";
+  txt.textContent = it.text;
 
-      el.append(grip, txt);
+  el.append(grip, txt);
 
-      // drag
-      el.addEventListener("dragstart", (e)=>{
-        draggingId = it.id;
-        e.dataTransfer.effectAllowed = "move";
-        try{ e.dataTransfer.setData("text/plain", it.id); }catch(_){}
-        logInteraction("activity_dragstart", it.id, { from: placement.get(it.id) });
-      });
-      el.addEventListener("dragend", ()=>{
-        draggingId = null;
-        clearZoneHighlights();
-      });
+  el.addEventListener("dragstart", (e)=>{
+    draggingId = it.id;
+    e.dataTransfer.effectAllowed = "move";
+    try{ e.dataTransfer.setData("text/plain", it.id); }catch(_){}
+    logInteraction("activity_dragstart", it.id, { from: placement.get(it.id) });
+  });
 
-      // keyboard shortcuts
-      el.addEventListener("keydown", (e)=>{
-        const k = e.key.toLowerCase();
-        if(k === "s"){ e.preventDefault(); moveTo(it.id, "standard"); }
-        if(k === "t"){ e.preventDefault(); moveTo(it.id, "transmission"); }
-        if(k === "p"){ e.preventDefault(); moveTo(it.id, "pool"); }
-      });
+  el.addEventListener("dragend", ()=>{
+    draggingId = null;
+    clearZoneHighlights();
+  });
 
-      return el;
-    }
+  return el;
+}
 
-    function mount(){
-      pool.innerHTML = "";
-      bucketStandard.innerHTML = "";
-      bucketTransmission.innerHTML = "";
-      items.forEach(it=>{
-        placement.set(it.id, "pool");
-        pool.append(makeItemEl(it));
-      });
-      state.activity.total = items.length;
-      state.activity.placement = Object.fromEntries(placement.entries());
-      saveState();
-    }
-    mount();
+function mount(){
+  pool.innerHTML = "";
+  bucketStandard.innerHTML = "";
+  bucketTransmission.innerHTML = "";
+  items.forEach(it=>{
+    placement.set(it.id, "pool");
+    pool.append(makeItemEl(it));
+  });
+  state.activity.total = items.length;
+  state.activity.placement = Object.fromEntries(placement.entries());
+  saveState();
+}
+mount();
 
-    function moveTo(id, where){
-      placement.set(id, where);
-      const node = document.querySelector(`[data-item="${id}"]`);
-      if(!node) return;
+function moveTo(id, where){
+  placement.set(id, where);
+  const node = document.querySelector(`[data-item="${id}"]`);
+  if(!node) return;
 
-      if(where === "pool") pool.append(node);
-      if(where === "standard") bucketStandard.append(node);
-      if(where === "transmission") bucketTransmission.append(node);
+  if(where === "pool") pool.append(node);
+  if(where === "standard") bucketStandard.append(node);
+  if(where === "transmission") bucketTransmission.append(node);
 
-      state.activity.placement = Object.fromEntries(placement.entries());
-      saveState();
-      logInteraction("activity_move", id, { to: where });
-    }
+  state.activity.placement = Object.fromEntries(placement.entries());
+  saveState();
+  logInteraction("activity_move", id, { to: where });
+}
 
-    function setupDropZone(zoneEl, target){
-      zoneEl.addEventListener("dragover", (e)=>{
-        e.preventDefault();
-        zoneEl.classList.add("dragOver");
-        e.dataTransfer.dropEffect = "move";
-      });
-      zoneEl.addEventListener("dragleave", ()=>{
-        zoneEl.classList.remove("dragOver");
-      });
-      zoneEl.addEventListener("drop", (e)=>{
-        e.preventDefault();
-        zoneEl.classList.remove("dragOver");
-        const id = (e.dataTransfer && e.dataTransfer.getData("text/plain")) || draggingId;
-        if(!id) return;
-        moveTo(id, target);
-        logInteraction("activity_drop", id, { to: target });
-      });
-    }
-    function clearZoneHighlights(){
-      zoneStandard.classList.remove("dragOver");
-      zoneTransmission.classList.remove("dragOver");
-    }
-    setupDropZone(zoneStandard, "standard");
-    setupDropZone(zoneTransmission, "transmission");
+function setupDropZone(zoneEl, target){
+  zoneEl.addEventListener("dragover", (e)=>{
+    e.preventDefault();
+    zoneEl.classList.add("dragOver");
+    e.dataTransfer.dropEffect = "move";
+  });
+  zoneEl.addEventListener("dragleave", ()=>{
+    zoneEl.classList.remove("dragOver");
+  });
+  zoneEl.addEventListener("drop", (e)=>{
+    e.preventDefault();
+    zoneEl.classList.remove("dragOver");
+    const id = (e.dataTransfer && e.dataTransfer.getData("text/plain")) || draggingId;
+    if(!id) return;
+    moveTo(id, target);
+    logInteraction("activity_drop", id, { to: target });
+  });
+}
 
-    checkActivity.addEventListener("click", ()=>{
-      let correctCount = 0;
-      items.forEach(it=>{
-        if(placement.get(it.id) === it.correct) correctCount++;
-      });
+function clearZoneHighlights(){
+  zoneStandard.classList.remove("dragOver");
+  zoneTransmission.classList.remove("dragOver");
+}
 
-      state.activity.checked = true;
-      state.activity.correctCount = correctCount;
-      state.activity.placement = Object.fromEntries(placement.entries());
-      saveState();
+setupDropZone(zoneStandard, "standard");
+setupDropZone(zoneTransmission, "transmission");
 
-      fbAct.hidden = false;
-      const ok = correctCount === items.length;
-      fbAct.className = "feedback " + (ok ? "good" : "bad");
-      fbAct.textContent = ok
-        ? "Nice work — all items are correctly classified."
-        : `You classified ${correctCount}/${items.length} correctly. Review Standard vs Transmission-Based precautions and try again.`;
+checkActivity.addEventListener("click", ()=>{
+  let correctCount = 0;
+  items.forEach(it=>{
+    if(placement.get(it.id) === it.correct) correctCount++;
+  });
 
-      logInteraction("activity_check", "classify", {
-        correctCount, total: items.length,
-        placement: Object.fromEntries(placement.entries())
-      });
-    });
+  state.activity.checked = true;
+  state.activity.correctCount = correctCount;
+  state.activity.placement = Object.fromEntries(placement.entries());
+  saveState();
+
+  fbAct.hidden = false;
+  const ok = correctCount === items.length;
+  fbAct.className = "feedback " + (ok ? "good" : "bad");
+  fbAct.textContent = ok
+    ? "Nice work — all items are correctly classified."
+    : `You classified ${correctCount}/${items.length} correctly. Review Standard vs Transmission-Based precautions and try again.`;
+
+  logInteraction("activity_check", "classify", {
+    correctCount, total: items.length,
+    placement: Object.fromEntries(placement.entries())
+  });
+});
+
 
     /***********************
      * Mark Complete Logic
