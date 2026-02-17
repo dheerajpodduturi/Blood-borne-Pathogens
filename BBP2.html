@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Bloodborne Pathogens Safety — eLearning</title>
-  <meta name="description" content="Modern continuous-scrolling Bloodborne Pathogens course aligned to OSHA 29 CFR 1910.1030." />
+  <title>Bloodborne Pathogens Safety — SCORM 1.2</title>
+  <meta name="description" content="SCORM 1.2 compatible Bloodborne Pathogens course aligned to OSHA 29 CFR 1910.1030." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,7 +14,6 @@
     :root{
       --bg: #f6f8fb;
       --panel: #ffffff;
-      --panel2:#f1f7f6;
       --ink:#0f172a;
       --muted:#475569;
       --muted2:#64748b;
@@ -24,17 +23,14 @@
 
       --teal:#0ea5a4;
       --teal2:#0b8a89;
-      --tealSoft: rgba(14,165,164,.12);
       --danger:#ef4444;
-      --warn:#f59e0b;
       --ok:#22c55e;
 
-      --r12: 12px;
-      --r16: 16px;
       --r20: 20px;
-
-      --max: 1100px;
       --navH: 70px;
+
+      /* ✅ Wider container to match your screenshot */
+      --max: 1440px;
 
       --ease: cubic-bezier(.2,.8,.2,1);
       --dur: 420ms;
@@ -82,14 +78,12 @@
     }
     .brand{
       display:flex; align-items:center; gap:10px;
-      font-weight:800;
-      letter-spacing:-.02em;
+      font-weight:800; letter-spacing:-.02em;
     }
     .brand__dot{
       width:10px; height:10px; border-radius:999px; background:var(--teal);
       box-shadow: 0 0 0 6px rgba(14,165,164,.12);
     }
-
     .topbar__right{
       display:flex; align-items:center; gap:12px;
     }
@@ -100,7 +94,7 @@
       border:1px solid rgba(14,165,164,.35);
       background: rgba(14,165,164,.08);
       color: #0b6f6e;
-      font-weight:700;
+      font-weight:800;
       font-size:13px;
       white-space:nowrap;
     }
@@ -133,11 +127,13 @@
       padding-top: calc(var(--navH) + 26px);
       padding-bottom: 70px;
     }
+
+    /* ✅ Wider layout: content + sidebar but not cramped */
     .wrap{
       width:min(var(--max), calc(100% - 32px));
       margin:0 auto;
       display:grid;
-      grid-template-columns: 1fr 260px;
+      grid-template-columns: 1fr 300px;
       gap:28px;
       align-items:start;
     }
@@ -147,8 +143,8 @@
     }
 
     section{ margin: 0 0 26px; }
-    .hero{ padding: 22px 0 10px; }
 
+    .hero{ padding: 22px 0 10px; }
     .chips{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px; }
     .chip{
       display:inline-flex; align-items:center; gap:8px;
@@ -157,7 +153,7 @@
       border:1px solid var(--border);
       border-radius: 999px;
       box-shadow: var(--shadow);
-      font-weight:600;
+      font-weight:700;
       font-size:13px;
       color: var(--muted);
     }
@@ -171,7 +167,7 @@
     }
     .lead{
       margin: 14px 0 0;
-      max-width: 75ch;
+      max-width: 78ch;
       font-size: 16.5px;
       color: var(--muted);
     }
@@ -181,10 +177,7 @@
       border:1px solid var(--border);
       border-radius: var(--r20);
       box-shadow: var(--shadow);
-    }
-    .card--soft{
-      background: linear-gradient(180deg, rgba(14,165,164,.08), rgba(14,165,164,.03));
-      border:1px solid rgba(14,165,164,.22);
+      width:100%;
     }
     .pad{ padding: 22px; }
 
@@ -211,16 +204,15 @@
     .checkboxLine{
       display:flex; align-items:center; gap:10px;
       color: var(--muted);
-      font-weight:600;
+      font-weight:700;
     }
     .checkboxLine input{ width:18px; height:18px; accent-color: var(--teal); }
 
-    /* Tag */
     .tag{
       display:inline-flex; align-items:center;
       padding: 6px 12px;
       border-radius: 999px;
-      font-weight:800;
+      font-weight:900;
       font-size: 13px;
       background: rgba(14,165,164,.12);
       color: #0b6f6e;
@@ -232,7 +224,7 @@
       letter-spacing:-.02em;
     }
 
-    /* ===== Knowledge Check Options (Improved Selected UI) ===== */
+    /* ===== Knowledge Check (premium selected + submit enable) ===== */
     .options{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -287,9 +279,8 @@
       color:#fff;
       box-shadow: 0 10px 20px rgba(11,138,137,.18);
     }
-    .optText{ font-weight:700; color: var(--ink); }
+    .optText{ font-weight:800; color: var(--ink); }
 
-    /* Submit button disabled until selection */
     .btnPrimary{
       width:100%;
       margin-top: 18px;
@@ -304,7 +295,7 @@
       transition: background 220ms var(--ease), transform 220ms var(--ease), filter 220ms var(--ease);
     }
     .btnPrimary.is-enabled{
-      background: #0b8a89; /* enabled/dark teal */
+      background: #0b8a89;
       cursor:pointer;
     }
     .btnPrimary.is-enabled:hover{
@@ -320,83 +311,22 @@
       border: 1px solid rgba(15,23,42,.10);
       background: rgba(15,23,42,.03);
       color: var(--muted);
-      font-weight: 650;
+      font-weight: 700;
     }
-    .feedback.good{
-      border-color: rgba(34,197,94,.25);
-      background: rgba(34,197,94,.10);
-      color: #166534;
-    }
-    .feedback.bad{
-      border-color: rgba(239,68,68,.25);
-      background: rgba(239,68,68,.10);
-      color: #7f1d1d;
-    }
+    .feedback.good{ border-color: rgba(34,197,94,.25); background: rgba(34,197,94,.10); color: #166534; }
+    .feedback.bad{ border-color: rgba(239,68,68,.25); background: rgba(239,68,68,.10); color: #7f1d1d; }
 
-    /* Quote block */
-    .quote{
-      padding: 22px;
-      border-radius: 18px;
-      background: rgba(14,165,164,.07);
-      border:1px solid rgba(14,165,164,.25);
-      display:grid;
-      gap:10px;
-    }
-    .quoteMark{ width:30px; height:30px; color: var(--teal); }
-    .quote p{
-      margin:0;
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: -.02em;
-      line-height: 1.25;
-    }
-    .quote small{ color: var(--muted2); font-weight: 650; }
+    /* ===== Activity (MATCHES YOUR IMAGE) ===== */
+    .activityHeader{ display:grid; gap:6px; margin-bottom: 12px; }
 
-    /* Stat card */
-    .statRow{
-      display:flex; gap:16px; align-items:center;
-      padding: 18px 22px;
-    }
-    .statIcon{
-      width:54px; height:54px;
-      border-radius: 16px;
-      background: rgba(239,68,68,.12);
-      border: 1px solid rgba(239,68,68,.25);
-      display:grid; place-items:center;
-      color: var(--danger);
-      flex: 0 0 auto;
-    }
-    .statNum{
-      font-size: 46px;
-      font-weight: 900;
-      letter-spacing: -.03em;
-      line-height:1;
-      margin:0;
-    }
-    .statText{
-      margin: 4px 0 0;
-      color: var(--muted);
-      font-weight: 650;
-    }
-    .statSource{
-      margin: 0;
-      color: var(--muted2);
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    /* ===== Activity (WIDE like your reference) ===== */
-    .activityHeader{
-      display:grid;
-      gap:6px;
-      margin-bottom: 12px;
-    }
+    /* ✅ exactly like screenshot: 3 columns, wide buckets */
     .activityGrid{
       display:grid;
-      grid-template-columns: 480px 1fr 1fr; /* wider left + large buckets */
-      gap:18px;
+      grid-template-columns: 260px 1fr 1fr;
+      gap: 22px;
       align-items:start;
       margin-top: 16px;
+      width:100%;
     }
     @media (max-width: 1100px){
       .activityGrid{ grid-template-columns: 1fr; }
@@ -409,205 +339,84 @@
       font-weight:900;
     }
 
-    .dropZone{
-      border: 2px dashed rgba(100,116,139,.45);
-      border-radius: 18px;
-      background: rgba(248,250,252,.75);
-      padding: 14px;
-      min-height: 260px; /* big targets */
-      transition: border-color 180ms var(--ease), background 180ms var(--ease), box-shadow 180ms var(--ease);
-    }
-    .dropZone h4{
-      margin: 0 0 12px;
-      font-size: 14px;
-      color: var(--muted);
-      font-weight: 900;
-    }
-    .dropZone.dragOver{
-      border-color: rgba(14,165,164,.85);
-      background: rgba(14,165,164,.08);
-      box-shadow: 0 0 0 4px rgba(14,165,164,.12);
-    }
+    .itemList{ display:grid; gap:12px; }
 
-    .itemList{
-      display:grid;
-      gap:12px;
-    }
-
+    /* ✅ Left list item = simple handle + label (no buttons) */
     .dndItem{
       display:flex;
       align-items:center;
-      justify-content:space-between;
       gap:12px;
       padding: 14px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(15,23,42,.10);
+      border-radius: 12px;
+      border: 1px solid rgba(15,23,42,.12);
       background: #fff;
       box-shadow: 0 8px 22px rgba(15,23,42,.06);
       cursor: grab;
+      user-select:none;
     }
     .dndItem:active{ cursor: grabbing; }
-    .dndLeft{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      min-width: 0;
+    .dndItem:focus-visible{
+      outline:3px solid rgba(14,165,164,.35);
+      outline-offset:3px;
     }
+
     .grip{
-      width:36px; height:36px;
-      border-radius: 12px;
+      width:34px; height:34px;
+      border-radius: 10px;
       background: rgba(15,23,42,.05);
       display:grid;
       place-items:center;
       color: var(--muted2);
       flex:0 0 auto;
+      font-weight:900;
+      line-height:1;
     }
     .dndText{
-      font-weight: 800;
+      font-weight:800;
       color: var(--ink);
       font-size: 14px;
       line-height: 1.2;
-      word-break: break-word;
     }
 
-    /* small move buttons (keyboard fallback) */
-    .moveBtns{
-      display:flex;
-      gap:8px;
-      flex: 0 0 auto;
-      flex-wrap: nowrap;
+    /* ✅ Big dashed zones like screenshot */
+    .dropZone{
+      border: 2px dashed rgba(100,116,139,.45);
+      border-radius: 14px;
+      background: transparent;
+      padding: 14px;
+      min-height: 280px;
+      transition: border-color 180ms var(--ease), background 180ms var(--ease), box-shadow 180ms var(--ease);
     }
-    .miniBtn{
-      border: 1px solid rgba(15,23,42,.12);
-      background: rgba(248,250,252,.92);
-      border-radius: 999px;
-      padding: 8px 10px;
-      font-weight: 900;
-      color: #334155;
-      cursor:pointer;
-      line-height:1;
+    .dropZoneTitle{
+      margin: 6px 0 12px;
+      font-size: 14px;
+      color: var(--ink);
+      font-weight:900;
     }
-    .miniBtn:hover{
-      border-color: rgba(14,165,164,.35);
-      color:#0b6f6e;
+    .dropZone.dragOver{
+      border-color: rgba(14,165,164,.85);
       background: rgba(14,165,164,.06);
+      box-shadow: 0 0 0 4px rgba(14,165,164,.10);
     }
 
-    /* Buttons inside activity */
+    .bucketItem{
+      display:flex;
+      align-items:center;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(15,23,42,.12);
+      background: #fff;
+      box-shadow: 0 8px 22px rgba(15,23,42,.05);
+    }
+
+    /* activity footer */
     .activityFooter{
       margin-top: 16px;
       padding-top: 16px;
       border-top: 1px solid rgba(15,23,42,.08);
     }
 
-    /* Accordion */
-    .acc{
-      border-radius: 16px;
-      overflow:hidden;
-      border: 1px solid rgba(15,23,42,.10);
-      background: #fff;
-    }
-    .acc + .acc{ margin-top: 10px; }
-    .acc summary{
-      list-style:none;
-      display:flex; align-items:center; justify-content:space-between;
-      padding: 14px 16px;
-      cursor:pointer;
-      font-weight: 900;
-      color: var(--ink);
-      user-select:none;
-    }
-    .acc summary::-webkit-details-marker{ display:none; }
-    .dot{
-      width:8px; height:8px; border-radius:999px;
-      background: var(--danger);
-      display:inline-block;
-      margin-right:10px;
-    }
-    .accBody{
-      padding: 0 16px 16px;
-      color: var(--muted);
-      font-weight: 600;
-    }
-    .accBody h5{
-      margin: 12px 0 6px;
-      color: var(--ink);
-      font-size: 13px;
-    }
-    .accBody p{ margin:0; }
-
-    /* Completion */
-    .completeCard{
-      text-align:center;
-      padding: 28px 22px;
-      background: linear-gradient(180deg, rgba(14,165,164,.10), rgba(14,165,164,.02));
-      border:1px solid rgba(14,165,164,.28);
-      border-radius: 20px;
-      box-shadow: var(--shadow2);
-    }
-    .badgeRound{
-      width:60px; height:60px;
-      border-radius: 999px;
-      margin: 0 auto 10px;
-      background: rgba(14,165,164,.16);
-      border: 1px solid rgba(14,165,164,.30);
-      display:grid; place-items:center;
-      color: var(--teal2);
-    }
-    .completeCard h3{
-      margin: 8px 0 8px;
-      font-size: 40px;
-      letter-spacing: -.03em;
-    }
-    .completeCard p{
-      margin:0 auto;
-      max-width: 65ch;
-      color: var(--muted);
-      font-weight: 650;
-    }
-    .xpRow{
-      display:flex; align-items:center; justify-content:center; gap:12px;
-      margin-top: 16px;
-      flex-wrap:wrap;
-    }
-    .xpPill{
-      display:inline-flex; align-items:center; gap:8px;
-      background: rgba(14,165,164,.15);
-      border:1px solid rgba(14,165,164,.25);
-      border-radius: 12px;
-      padding: 10px 12px;
-      font-weight: 900;
-      color:#0b6f6e;
-    }
-    .barWrap{
-      width:min(520px, 100%);
-      margin: 16px auto 0;
-    }
-    .bar{
-      height:10px; border-radius: 999px;
-      background: rgba(15,23,42,.10);
-      overflow:hidden;
-    }
-    .bar > span{
-      display:block; height:100%; width:0%;
-      background: linear-gradient(90deg, var(--teal), #22c55e);
-      transition: width var(--dur) var(--ease);
-    }
-    .continueBtn{
-      margin-top: 18px;
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
-      padding: 12px 16px;
-      border-radius: 12px;
-      border:1px solid rgba(15,23,42,.10);
-      background: #0b8a89;
-      color:#fff;
-      font-weight: 900;
-      text-decoration:none;
-      box-shadow: 0 10px 26px rgba(14,165,164,.22);
-    }
-
-    /* Right side lesson nav */
+    /* Side nav */
     .sideNav{
       position: sticky;
       top: calc(var(--navH) + 18px);
@@ -630,7 +439,7 @@
       border-radius: 12px;
       text-decoration:none;
       color: var(--muted);
-      font-weight: 800;
+      font-weight: 900;
       font-size: 13px;
     }
     .navItem a:hover{ background: rgba(14,165,164,.08); color:#0b6f6e; }
@@ -647,48 +456,42 @@
       box-shadow: 0 0 0 6px rgba(14,165,164,.12);
     }
 
-    /* Scroll reveal */
+    /* reveal */
     .reveal{ opacity:0; transform: translateY(14px); transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease); }
     .reveal.in{ opacity:1; transform:none; }
 
-    /* Floating help button */
-    .helpBtn{
-      position: fixed;
-      right: 16px;
-      bottom: 16px;
-      width: 44px; height: 44px;
-      border-radius: 999px;
-      border: 1px solid rgba(15,23,42,.12);
-      background: rgba(255,255,255,.9);
-      box-shadow: var(--shadow2);
-      color: var(--muted);
-      display:grid; place-items:center;
+    /* Mark complete */
+    .markCompleteRow{
+      display:flex; gap:12px; flex-wrap:wrap;
+      align-items:center; justify-content:space-between;
+      margin-top: 10px;
+    }
+    .secondaryBtn{
+      border:1px solid rgba(15,23,42,.12);
+      background:#fff;
+      border-radius:12px;
+      padding: 12px 14px;
+      font-weight:900;
       cursor:pointer;
-      z-index:1002;
     }
-    .helpBtn:hover{ color:#0b6f6e; border-color: rgba(14,165,164,.28); }
-    .toast{
-      position: fixed;
-      right: 16px;
-      bottom: 70px;
-      max-width: 360px;
-      background: rgba(255,255,255,.95);
-      border: 1px solid rgba(15,23,42,.12);
-      border-radius: 14px;
-      padding: 12px 12px;
-      box-shadow: var(--shadow2);
+    .secondaryBtn:hover{
+      border-color: rgba(14,165,164,.35);
+      background: rgba(14,165,164,.05);
+      color:#0b6f6e;
+    }
+
+    .statusPill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border:1px solid rgba(15,23,42,.12);
+      background: rgba(255,255,255,.9);
       color: var(--muted);
-      font-weight: 650;
-      opacity:0;
-      transform: translateY(10px);
-      pointer-events:none;
-      transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
-      z-index:1002;
+      font-weight:900;
     }
-    .toast.show{ opacity:1; transform:none; }
 
     @media print{
-      .topbar, .progressStrip, .sideNav, .helpBtn, .toast { display:none !important; }
+      .topbar, .progressStrip, .sideNav { display:none !important; }
       body{ background:#fff; }
       main{ padding-top: 0; }
       .wrap{ grid-template-columns: 1fr; }
@@ -740,7 +543,7 @@
             </div>
           </div>
 
-          <h1>Module 1: Exposure Prevention &amp;<br/>Standard Precautions</h1>
+          <h1>Module: Exposure Prevention &amp;<br/>Standard Precautions</h1>
           <p class="lead">
             Learn the critical protocols for minimizing exposure to bloodborne pathogens including proper PPE selection,
             hand hygiene, and safe sharps handling — aligned to OSHA 29 CFR 1910.1030.
@@ -800,51 +603,7 @@
           </div>
         </section>
 
-        <!-- READING -->
-        <section class="reveal" id="reading" data-section="Reading">
-          <h2 style="margin:10 10 20px; letter-spacing:-.02em; font-size:36px;">Understanding Standard Precautions</h2>
-
-          
-          <p class="lead" style="margin-top:0;">
-            Standard Precautions represent the minimum infection prevention practices that apply to all patient care,
-            regardless of suspected or confirmed infection status.
-          </p>
-
-          <div class="quote card--soft" role="note" aria-label="Guidance quote">
-            <svg class="quoteMark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M9 7c-2 1-3 3-3 5 0 2 1 4 3 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              <path d="M18 7c-2 1-3 3-3 5 0 2 1 4 3 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            <p>“Treat all blood and body fluids as if they are infectious — this single principle prevents the majority of occupational exposures.”</p>
-            <small>— CDC Infection Control Guidelines (principle reflected in standard precautions)</small>
-          </div>
-
-          <h3 style="margin:18px 0 8px; letter-spacing:-.02em; font-size:24px;">Core Components</h3>
-          <p class="lead" style="margin:0;">
-            Standard Precautions include hand hygiene, PPE, safe injection practices, safe handling of contaminated
-            equipment, and respiratory hygiene/cough etiquette.
-          </p>
-
-          <div class="card" style="margin-top:16px;">
-            <div class="statRow">
-              <div class="statIcon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 9v5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M12 17h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                  <path d="M10.2 4.6 2.6 18a2 2 0 0 0 1.7 3h15.4a2 2 0 0 0 1.7-3L13.8 4.6a2 2 0 0 0-3.6 0Z"
-                        stroke="currentColor" stroke-width="2" />
-                </svg>
-              </div>
-              <div>
-                <p class="statNum">385,000</p>
-                <p class="statText">Needlestick injuries occur among U.S. healthcare workers annually</p>
-                <p class="statSource">Source: CDC/NIOSH (commonly cited estimate)</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ACTIVITY (Wide DnD) -->
+        <!-- ACTIVITY -->
         <section class="reveal" id="activity" data-section="Activity">
           <div class="card pad">
             <div class="activityHeader">
@@ -853,7 +612,11 @@
                 Classify each action as a Standard Precaution or a Transmission-Based Precaution
               </h2>
               <p class="lead" style="margin-top:0;">
-                Drag items from the left into the appropriate category on the right. (Keyboard accessible via move buttons.)
+                Drag items from the left to the appropriate category on the right.
+                <span class="sr-only">Keyboard: focus an item and press S for Standard, T for Transmission, P to return to Items.</span>
+              </p>
+              <p class="lead" style="margin-top:0;font-size:14px;color:var(--muted2)">
+                Keyboard: focus an item and press <b>S</b> (Standard), <b>T</b> (Transmission), or <b>P</b> (back to Items).
               </p>
             </div>
 
@@ -865,14 +628,14 @@
               </div>
 
               <!-- Standard -->
-              <div class="dropZone" id="zoneStandard" data-zone="standard" aria-label="Standard Precautions drop zone">
-                <h4>Standard Precautions</h4>
+              <div class="dropZone" id="zoneStandard" aria-label="Standard Precautions drop zone">
+                <div class="dropZoneTitle">Standard Precautions</div>
                 <div class="itemList" id="bucketStandard"></div>
               </div>
 
               <!-- Transmission -->
-              <div class="dropZone" id="zoneTransmission" data-zone="transmission" aria-label="Transmission-Based Precautions drop zone">
-                <h4>Transmission-Based Precautions</h4>
+              <div class="dropZone" id="zoneTransmission" aria-label="Transmission-Based Precautions drop zone">
+                <div class="dropZoneTitle">Transmission-Based Precautions</div>
                 <div class="itemList" id="bucketTransmission"></div>
               </div>
             </div>
@@ -880,96 +643,28 @@
             <div class="activityFooter">
               <button class="btnPrimary is-enabled" id="checkActivity" type="button">Check My Answers</button>
               <div class="feedback" id="fbAct" role="status" aria-live="polite" hidden></div>
+
+              <div class="markCompleteRow">
+                <button class="secondaryBtn" id="markCompleteBtn" type="button">Mark Complete</button>
+                <div class="statusPill" aria-live="polite">
+                  Status: <span id="statusText">incomplete</span> • Score: <span id="scoreText">0%</span>
+                </div>
+              </div>
+
+              <p class="lead" style="margin-top:10px;font-size:13px;color:var(--muted2)">
+                Completion requires: (1) scroll to bottom and (2) pass quiz score ≥ 70%, then click “Mark Complete”.
+              </p>
             </div>
           </div>
         </section>
 
-        <!-- REFERENCE -->
-        <section class="reveal" id="reference" data-section="Reference">
-          <div class="card pad">
-            <h2 style="margin:0; letter-spacing:-.02em; font-size:28px;">Key Pathogens at a Glance</h2>
-
-            <details class="acc" open>
-              <summary>
-                <span><span class="dot" style="background:#ef4444"></span>Hepatitis B (HBV)</span>
-                <span aria-hidden="true">⌄</span>
-              </summary>
-              <div class="accBody">
-                <h5>Transmission Routes</h5>
-                <p>Contact with infectious blood/fluids; commonly via needlestick injuries, mucous membrane exposure, or non-intact skin contact.</p>
-                <h5>Survivability on Surfaces</h5>
-                <p>Can remain infectious on environmental surfaces for up to 7 days under some conditions.</p>
-                <h5>Vaccine Availability</h5>
-                <p>Highly effective vaccine available; post-vaccination testing may be required by policy for some roles.</p>
-              </div>
-            </details>
-
-            <details class="acc">
-              <summary>
-                <span><span class="dot" style="background:#f97316"></span>Hepatitis C (HCV)</span>
-                <span aria-hidden="true">⌄</span>
-              </summary>
-              <div class="accBody">
-                <h5>Transmission Routes</h5>
-                <p>Primarily blood-to-blood contact; occupational exposure commonly via sharps injuries.</p>
-                <h5>Vaccine Availability</h5>
-                <p>No vaccine currently available; early evaluation and follow-up testing after exposure is critical.</p>
-              </div>
-            </details>
-
-            <details class="acc">
-              <summary>
-                <span><span class="dot" style="background:#eab308"></span>HIV</span>
-                <span aria-hidden="true">⌄</span>
-              </summary>
-              <div class="accBody">
-                <h5>Transmission Routes</h5>
-                <p>Blood or potentially infectious fluids contacting mucous membranes, non-intact skin, or percutaneous injury.</p>
-                <h5>Post-Exposure Prophylaxis (PEP)</h5>
-                <p>PEP should be evaluated urgently after exposure — many protocols recommend initiation as soon as possible.</p>
-              </div>
-            </details>
-
-            <details class="acc">
-              <summary>
-                <span><span class="dot" style="background:#22c55e"></span>Other Bloodborne Pathogens</span>
-                <span aria-hidden="true">⌄</span>
-              </summary>
-              <div class="accBody">
-                <h5>Examples</h5>
-                <p>Other pathogens can be present depending on patient population and exposure type. Follow your facility’s Exposure Control Plan.</p>
-              </div>
-            </details>
-          </div>
-        </section>
-
-        <!-- COMPLETE -->
+        <!-- COMPLETE (end marker) -->
         <section class="reveal" id="complete" data-section="Complete">
-          <div class="completeCard" role="region" aria-label="Module 1 completion">
-            <div class="badgeRound" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-                <path d="M12 2 20 5v7c0 5-3.6 9-8 10-4.4-1-8-5-8-10V5l8-3Z" stroke="currentColor" stroke-width="2"/>
-                <path d="m8 12 2.2 2.2L16 8.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <h3>Module 1 Complete!</h3>
-            <p>Excellent work! You’ve practiced exposure prevention and standard precautions — critical skills for maintaining safety in clinical environments.</p>
-
-            <div class="xpRow">
-              <div class="xpPill"><span aria-hidden="true">🏆</span><span>+ 150 XP</span></div>
-              <div style="color:var(--muted); font-weight:750;">1 of 6 modules completed</div>
-            </div>
-
-            <div class="barWrap" aria-label="Module progress">
-              <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="33">
-                <span id="moduleBar"></span>
-              </div>
-              <div style="margin-top:8px; color:var(--muted); font-weight:750;">33% of course complete</div>
-            </div>
-
-            <a class="continueBtn" href="#intro" id="continueBtn">
-              Continue to Module 2: Post-Exposure Response Protocols <span aria-hidden="true">→</span>
-            </a>
+          <div class="card pad">
+            <h2 style="margin:0;letter-spacing:-.02em;">You’ve reached the end of this module.</h2>
+            <p class="lead" style="margin-top:8px;">
+              To finish, ensure you passed the knowledge check (≥70%) and then click <b>Mark Complete</b>.
+            </p>
           </div>
         </section>
       </div>
@@ -981,9 +676,7 @@
             <li class="navItem"><a href="#intro" data-link="Intro"><span class="bullet" aria-hidden="true"></span>Intro</a></li>
             <li class="navItem"><a href="#video" data-link="Video"><span class="bullet" aria-hidden="true"></span>Video</a></li>
             <li class="navItem"><a href="#knowledge-check" data-link="Knowledge Check"><span class="bullet" aria-hidden="true"></span>Knowledge<br/>Check</a></li>
-            <li class="navItem"><a href="#reading" data-link="Reading"><span class="bullet" aria-hidden="true"></span>Reading</a></li>
             <li class="navItem"><a href="#activity" data-link="Activity"><span class="bullet" aria-hidden="true"></span>Activity</a></li>
-            <li class="navItem"><a href="#reference" data-link="Reference"><span class="bullet" aria-hidden="true"></span>Reference</a></li>
             <li class="navItem"><a href="#complete" data-link="Complete"><span class="bullet" aria-hidden="true"></span>Complete</a></li>
           </ul>
         </div>
@@ -991,14 +684,78 @@
     </div>
   </main>
 
-  <button class="helpBtn" id="helpBtn" type="button" aria-label="Help">?</button>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
   <script>
     /***********************
-     * Tracking (Standalone)
+     * SCORM 1.2 Wrapper
      ***********************/
-    const STORE_KEY = "bbp_standalone_tracking_v2";
+    const SCORM = (function(){
+      let api = null;
+      let connected = false;
+
+      function findAPI(win){
+        let attempts = 0;
+        while(win && attempts < 500){
+          if(win.API) return win.API;
+          attempts++;
+          win = win.parent;
+        }
+        return null;
+      }
+      function init(){
+        api = findAPI(window);
+        if(!api){
+          console.warn("[SCORM] API not found. Standalone mode.");
+          return false;
+        }
+        connected = api.LMSInitialize("") === "true";
+        console.log("[SCORM] Initialize:", connected);
+        return connected;
+      }
+      function getValue(k){
+        if(!connected) return "";
+        return api.LMSGetValue(k);
+      }
+      function setValue(k,v){
+        if(!connected){
+          console.log("[SCORM] set", k, v);
+          return true;
+        }
+        const r = api.LMSSetValue(k, String(v));
+        return r === "true";
+      }
+      function commit(){
+        if(!connected){
+          console.log("[SCORM] commit");
+          return true;
+        }
+        return api.LMSCommit("") === "true";
+      }
+      function finish(){
+        if(!connected){
+          console.log("[SCORM] finish");
+          return true;
+        }
+        return api.LMSFinish("") === "true";
+      }
+
+      return { init, getValue, setValue, commit, finish, isConnected:()=>connected };
+    })();
+
+    /***********************
+     * Helpers
+     ***********************/
+    function msToSCORMTime(ms){
+      const totalSeconds = Math.max(0, Math.floor(ms/1000));
+      const hh = String(Math.floor(totalSeconds/3600)).padStart(2,"0");
+      const mm = String(Math.floor((totalSeconds%3600)/60)).padStart(2,"0");
+      const ss = String(totalSeconds%60).padStart(2,"0");
+      return `${hh}:${mm}:${ss}`;
+    }
+
+    /***********************
+     * State + Tracking
+     ***********************/
+    const STORE_KEY = "bbp_scorm_state_v3";
     const state = loadState();
 
     function loadState(){
@@ -1010,21 +767,58 @@
           sectionEnteredAt: null,
           interactions: [],
           quiz: { q1: { attempts:0, selected:null, correct:null } },
-          activity: { checked:false, correctCount:0, total:0, placement:{} }
+          activity: { checked:false, correctCount:0, total:0, placement:{} },
+          scoreRaw: 0,
+          passed: false,
+          scrolledBottom: false,
+          status: "incomplete"
         };
       }catch(e){
-        return { startedAt: Date.now(), sectionTimeMs:{}, currentSection:null, sectionEnteredAt:null, interactions:[], quiz:{ q1:{attempts:0, selected:null, correct:null } }, activity:{ checked:false, correctCount:0, total:0, placement:{} } };
+        return {
+          startedAt: Date.now(),
+          sectionTimeMs:{},
+          currentSection:null,
+          sectionEnteredAt:null,
+          interactions:[],
+          quiz:{ q1:{attempts:0, selected:null, correct:null } },
+          activity:{ checked:false, correctCount:0, total:0, placement:{} },
+          scoreRaw:0, passed:false, scrolledBottom:false, status:"incomplete"
+        };
       }
     }
     function saveState(){ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }
+
     function logInteraction(type, id, meta={}){
       state.interactions.push({ t: Date.now(), type, id, meta });
       saveState();
     }
 
-    /* Scroll progress */
+    /***********************
+     * Initialize SCORM
+     ***********************/
+    const scormConnected = SCORM.init();
+    if(scormConnected){
+      const existing = SCORM.getValue("cmi.core.lesson_status");
+      if(existing && existing !== "not attempted"){
+        state.status = existing;
+      }else{
+        SCORM.setValue("cmi.core.lesson_status", "incomplete");
+        state.status = "incomplete";
+        SCORM.commit();
+      }
+    }
+
+    const statusText = document.getElementById("statusText");
+    const scoreText = document.getElementById("scoreText");
+    statusText.textContent = state.status;
+    scoreText.textContent = Math.round(state.scoreRaw) + "%";
+
+    /***********************
+     * Scroll progress + bottom detection
+     ***********************/
     const progressBar = document.getElementById("progressBar");
     const pctEl = document.getElementById("pct");
+
     function updateProgress(){
       const doc = document.documentElement;
       const scrollTop = doc.scrollTop || document.body.scrollTop;
@@ -1033,12 +827,19 @@
       const pct = Math.round(p * 100);
       progressBar.style.width = pct + "%";
       pctEl.textContent = pct + "%";
+
+      if(pct >= 98){
+        state.scrolledBottom = true;
+        saveState();
+      }
       return pct;
     }
     window.addEventListener("scroll", updateProgress, { passive:true });
     updateProgress();
 
-    /* Side nav + time per section */
+    /***********************
+     * Section timing + side nav highlight
+     ***********************/
     const sections = [...document.querySelectorAll("section[data-section]")];
     const navLinks = [...document.querySelectorAll("#lessonNav a")];
 
@@ -1055,6 +856,7 @@
       state.sectionEnteredAt = now;
       saveState();
     }
+
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
         if(entry.isIntersecting){
@@ -1065,15 +867,18 @@
       });
     }, { threshold: 0.55 });
     sections.forEach(s => io.observe(s));
-    window.addEventListener("beforeunload", () => commitSectionTime(state.currentSection || "Intro"));
 
-    /* Reveal animations */
+    /***********************
+     * Reveal animations
+     ***********************/
     const revealIO = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("in"); });
     }, { threshold: 0.18 });
     document.querySelectorAll(".reveal").forEach(el => revealIO.observe(el));
 
-    /* Global click tracking */
+    /***********************
+     * Global click tracking
+     ***********************/
     document.addEventListener("click", (e)=>{
       const t = e.target.closest("button,a,input,[role='radio']");
       if(!t) return;
@@ -1081,36 +886,21 @@
       logInteraction("click", id, { tag: t.tagName.toLowerCase(), section: state.currentSection });
     }, true);
 
-    /* Help toast */
-    const helpBtn = document.getElementById("helpBtn");
-    const toast = document.getElementById("toast");
-    helpBtn.addEventListener("click", ()=>{
-      showToast("Tip: Drag items into the dashed boxes. You can also use the Pool/Standard/Transmission buttons for keyboard access.");
-      logInteraction("help", "helpBtn");
-    });
-    function showToast(msg){
-      toast.textContent = msg;
-      toast.classList.add("show");
-      setTimeout(()=>toast.classList.remove("show"), 3200);
-    }
-
-    /* Video toggle */
+    /***********************
+     * Video completion checkbox
+     ***********************/
     document.getElementById("markVideo").addEventListener("change", (e)=>{
       logInteraction("video_complete_toggle", "markVideo", { checked: e.target.checked });
-      showToast(e.target.checked ? "Video marked complete." : "Video unmarked.");
     });
 
     /***********************
      * Knowledge Check Q1
-     * - Better selected visual
-     * - Submit enabled only after selection
      ***********************/
     const q1Correct = "B";
     const q1Opts = [...document.querySelectorAll(".options[data-qid='q1'] .opt")];
     const submitQ1 = document.getElementById("submitQ1");
     const fbQ1 = document.getElementById("fbQ1");
 
-    // ensure disabled on load
     submitQ1.disabled = true;
     submitQ1.classList.remove("is-enabled");
 
@@ -1125,7 +915,6 @@
       state.quiz.q1.selected = optEl.dataset.opt;
       saveState();
 
-      // enable submit
       submitQ1.disabled = false;
       submitQ1.classList.add("is-enabled");
 
@@ -1141,6 +930,15 @@
         }
       });
     });
+
+    function recomputeScore(){
+      const total = 1;
+      const correct = state.quiz.q1.correct ? 1 : 0;
+      state.scoreRaw = (correct/total) * 100;
+      state.passed = state.scoreRaw >= 70;
+      scoreText.textContent = Math.round(state.scoreRaw) + "%";
+      saveState();
+    }
 
     submitQ1.addEventListener("click", ()=>{
       if(!state.quiz.q1.selected){
@@ -1166,10 +964,18 @@
         correct,
         attempts: state.quiz.q1.attempts
       });
+
+      recomputeScore();
+
+      // update SCORM score fields
+      SCORM.setValue("cmi.core.score.raw", Math.round(state.scoreRaw));
+      SCORM.setValue("cmi.core.score.min", 0);
+      SCORM.setValue("cmi.core.score.max", 100);
+      SCORM.commit();
     });
 
     /***********************
-     * Activity: Real Drag & Drop + keyboard fallback buttons
+     * Activity: Drag & Drop (NO buttons)
      ***********************/
     const items = [
       { id:"i1", text:"Hand hygiene between patients", correct:"standard" },
@@ -1191,64 +997,47 @@
     const placement = new Map(); // id -> "pool"|"standard"|"transmission"
     let draggingId = null;
 
-    function renderItem(it){
-      const row = document.createElement("div");
-      row.className = "dndItem";
-      row.setAttribute("data-item", it.id);
-      row.setAttribute("draggable", "true");
-      row.setAttribute("role","group");
-      row.setAttribute("aria-label", it.text);
-
-      const left = document.createElement("div");
-      left.className = "dndLeft";
+    function makeItemEl(it){
+      const el = document.createElement("div");
+      el.className = "dndItem";
+      el.setAttribute("data-item", it.id);
+      el.setAttribute("draggable", "true");
+      el.setAttribute("tabindex","0");
+      el.setAttribute("role","listitem");
+      el.setAttribute("aria-label", `${it.text}. Drag to classify. Keyboard: S for Standard, T for Transmission, P for Items.`);
 
       const grip = document.createElement("div");
       grip.className = "grip";
       grip.setAttribute("aria-hidden","true");
-      grip.innerHTML = "⋮⋮";
+      grip.textContent = "⋮⋮";
 
-      const label = document.createElement("div");
-      label.className = "dndText";
-      label.textContent = it.text;
+      const txt = document.createElement("div");
+      txt.className = "dndText";
+      txt.textContent = it.text;
 
-      left.append(grip, label);
+      el.append(grip, txt);
 
-      const btns = document.createElement("div");
-      btns.className = "moveBtns";
-
-      const bPool = mkBtn("Pool", () => moveTo(it.id, "pool"));
-      const bStd  = mkBtn("Standard", () => moveTo(it.id, "standard"));
-      const bTrn  = mkBtn("Transmission", () => moveTo(it.id, "transmission"));
-
-      btns.append(bPool, bStd, bTrn);
-
-      row.append(left, btns);
-
-      // Drag events
-      row.addEventListener("dragstart", (e)=>{
+      // drag
+      el.addEventListener("dragstart", (e)=>{
         draggingId = it.id;
         e.dataTransfer.effectAllowed = "move";
         try{ e.dataTransfer.setData("text/plain", it.id); }catch(_){}
         logInteraction("activity_dragstart", it.id, { from: placement.get(it.id) });
       });
-      row.addEventListener("dragend", ()=>{
+      el.addEventListener("dragend", ()=>{
         draggingId = null;
         clearZoneHighlights();
       });
 
-      return row;
+      // keyboard shortcuts
+      el.addEventListener("keydown", (e)=>{
+        const k = e.key.toLowerCase();
+        if(k === "s"){ e.preventDefault(); moveTo(it.id, "standard"); }
+        if(k === "t"){ e.preventDefault(); moveTo(it.id, "transmission"); }
+        if(k === "p"){ e.preventDefault(); moveTo(it.id, "pool"); }
+      });
 
-      function mkBtn(txt, onClick){
-        const b = document.createElement("button");
-        b.type = "button";
-        b.className = "miniBtn";
-        b.textContent = txt;
-        b.addEventListener("click", ()=>{
-          onClick();
-          logInteraction("activity_move", it.id, { to: placement.get(it.id) });
-        });
-        return b;
-      }
+      return el;
     }
 
     function mount(){
@@ -1257,7 +1046,7 @@
       bucketTransmission.innerHTML = "";
       items.forEach(it=>{
         placement.set(it.id, "pool");
-        pool.append(renderItem(it));
+        pool.append(makeItemEl(it));
       });
       state.activity.total = items.length;
       state.activity.placement = Object.fromEntries(placement.entries());
@@ -1276,6 +1065,7 @@
 
       state.activity.placement = Object.fromEntries(placement.entries());
       saveState();
+      logInteraction("activity_move", id, { to: where });
     }
 
     function setupDropZone(zoneEl, target){
@@ -1296,12 +1086,10 @@
         logInteraction("activity_drop", id, { to: target });
       });
     }
-
     function clearZoneHighlights(){
       zoneStandard.classList.remove("dragOver");
       zoneTransmission.classList.remove("dragOver");
     }
-
     setupDropZone(zoneStandard, "standard");
     setupDropZone(zoneTransmission, "transmission");
 
@@ -1329,10 +1117,67 @@
       });
     });
 
-    // Completion bar inside completion card
-    document.getElementById("moduleBar").style.width = "33%";
+    /***********************
+     * Mark Complete Logic
+     * Completion requires: scroll bottom + pass quiz
+     ***********************/
+    const markCompleteBtn = document.getElementById("markCompleteBtn");
 
-    // On load, set initial section time
+    function canComplete(){
+      return state.scrolledBottom && state.passed;
+    }
+
+    function updateStatusUI(){
+      statusText.textContent = state.status;
+      scoreText.textContent = Math.round(state.scoreRaw) + "%";
+      markCompleteBtn.disabled = !canComplete();
+      markCompleteBtn.style.opacity = canComplete() ? "1" : ".6";
+      markCompleteBtn.style.cursor = canComplete() ? "pointer" : "not-allowed";
+    }
+    updateStatusUI();
+    window.addEventListener("scroll", updateStatusUI);
+
+    markCompleteBtn.addEventListener("click", ()=>{
+      // compute session time and write to SCORM
+      commitSectionTime(state.currentSection || "Intro");
+
+      const totalMs = Object.values(state.sectionTimeMs).reduce((a,b)=>a+b,0);
+      const scormTime = msToSCORMTime(totalMs);
+
+      SCORM.setValue("cmi.core.session_time", scormTime);
+      SCORM.setValue("cmi.core.score.raw", Math.round(state.scoreRaw));
+
+      if(canComplete()){
+        state.status = "completed";
+        SCORM.setValue("cmi.core.lesson_status", "completed");
+      }else{
+        state.status = "incomplete";
+        SCORM.setValue("cmi.core.lesson_status", "incomplete");
+      }
+      saveState();
+      updateStatusUI();
+      SCORM.commit();
+      logInteraction("mark_complete", "markCompleteBtn", { canComplete: canComplete(), session_time: scormTime });
+      alert(canComplete()
+        ? "Completed! Progress has been sent to the LMS."
+        : "Not complete yet. Scroll to the bottom and pass the quiz (≥70%), then click Mark Complete.");
+    });
+
+    /***********************
+     * Handle unload: commit time
+     ***********************/
+    window.addEventListener("beforeunload", ()=>{
+      commitSectionTime(state.currentSection || "Intro");
+      const totalMs = Object.values(state.sectionTimeMs).reduce((a,b)=>a+b,0);
+      const scormTime = msToSCORMTime(totalMs);
+      SCORM.setValue("cmi.core.session_time", scormTime);
+      SCORM.setValue("cmi.core.score.raw", Math.round(state.scoreRaw));
+      SCORM.setValue("cmi.core.lesson_status", state.status || "incomplete");
+      SCORM.commit();
+      SCORM.finish();
+    });
+
+    // initial section time set
     if(!state.currentSection){
       state.currentSection = "Intro";
       state.sectionEnteredAt = Date.now();
