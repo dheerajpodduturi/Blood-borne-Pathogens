@@ -316,88 +316,84 @@
     .feedback.good{ border-color: rgba(34,197,94,.25); background: rgba(34,197,94,.10); color: #166534; }
     .feedback.bad{ border-color: rgba(239,68,68,.25); background: rgba(239,68,68,.10); color: #7f1d1d; }
 
-    /* ===== Activity (MATCHES YOUR IMAGE) ===== */
-    .activityHeader{ display:grid; gap:6px; margin-bottom: 12px; }
+   /* ===== Activity (MATCHES IMAGE, NO MOVE BUTTONS) ===== */
+.activityHeader{ display:grid; gap:6px; margin-bottom: 12px; }
 
-    /* ✅ exactly like screenshot: 3 columns, wide buckets */
-    .activityGrid{
-      display:grid;
-      grid-template-columns: 260px 1fr 1fr;
-      gap: 22px;
-      align-items:start;
-      margin-top: 16px;
-      width:100%;
-    }
-    @media (max-width: 1100px){
-      .activityGrid{ grid-template-columns: 1fr; }
-    }
+/* 3 columns like screenshot */
+.activityGrid{
+  display:grid;
+  grid-template-columns: 260px 1fr 1fr;
+  gap: 22px;
+  align-items:start;
+  margin-top: 16px;
+  width:100%;
+}
+@media (max-width: 1100px){
+  .activityGrid{ grid-template-columns: 1fr; }
+}
 
-    .itemsTitle{
-      margin:6px 0 10px;
-      font-size:14px;
-      color:var(--muted);
-      font-weight:900;
-    }
+.itemsTitle{
+  margin:6px 0 10px;
+  font-size:14px;
+  color:var(--muted);
+  font-weight:900;
+}
+.itemList{ display:grid; gap:12px; }
 
-    .itemList{ display:grid; gap:12px; }
+/* Item = handle + label only */
+.dndItem{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding: 14px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(15,23,42,.12);
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(15,23,42,.06);
+  cursor: grab;
+  user-select:none;
+}
+.dndItem:active{ cursor: grabbing; }
 
-    /* ✅ Left list item = simple handle + label (no buttons) */
-    .dndItem{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding: 14px 14px;
-      border-radius: 12px;
-      border: 1px solid rgba(15,23,42,.12);
-      background: #fff;
-      box-shadow: 0 8px 22px rgba(15,23,42,.06);
-      cursor: grab;
-      user-select:none;
-    }
-    .dndItem:active{ cursor: grabbing; }
-    .dndItem:focus-visible{
-      outline:3px solid rgba(14,165,164,.35);
-      outline-offset:3px;
-    }
+.grip{
+  width:34px; height:34px;
+  border-radius: 10px;
+  background: rgba(15,23,42,.05);
+  display:grid;
+  place-items:center;
+  color: var(--muted2);
+  flex:0 0 auto;
+  font-weight:900;
+  line-height:1;
+}
+.dndText{
+  font-weight:800;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.2;
+}
 
-    .grip{
-      width:34px; height:34px;
-      border-radius: 10px;
-      background: rgba(15,23,42,.05);
-      display:grid;
-      place-items:center;
-      color: var(--muted2);
-      flex:0 0 auto;
-      font-weight:900;
-      line-height:1;
-    }
-    .dndText{
-      font-weight:800;
-      color: var(--ink);
-      font-size: 14px;
-      line-height: 1.2;
-    }
+/* Drop zones = big dashed boxes */
+.dropZone{
+  border: 2px dashed rgba(100,116,139,.45);
+  border-radius: 14px;
+  background: transparent;
+  padding: 14px;
+  min-height: 280px;
+  transition: border-color 180ms var(--ease), background 180ms var(--ease), box-shadow 180ms var(--ease);
+}
+.dropZoneTitle{
+  margin: 6px 0 12px;
+  font-size: 14px;
+  color: var(--ink);
+  font-weight:900;
+}
+.dropZone.dragOver{
+  border-color: rgba(14,165,164,.85);
+  background: rgba(14,165,164,.06);
+  box-shadow: 0 0 0 4px rgba(14,165,164,.10);
+}
 
-    /* ✅ Big dashed zones like screenshot */
-    .dropZone{
-      border: 2px dashed rgba(100,116,139,.45);
-      border-radius: 14px;
-      background: transparent;
-      padding: 14px;
-      min-height: 280px;
-      transition: border-color 180ms var(--ease), background 180ms var(--ease), box-shadow 180ms var(--ease);
-    }
-    .dropZoneTitle{
-      margin: 6px 0 12px;
-      font-size: 14px;
-      color: var(--ink);
-      font-weight:900;
-    }
-    .dropZone.dragOver{
-      border-color: rgba(14,165,164,.85);
-      background: rgba(14,165,164,.06);
-      box-shadow: 0 0 0 4px rgba(14,165,164,.10);
-    }
 
     .bucketItem{
       display:flex;
