@@ -605,58 +605,56 @@
 
         <!-- ACTIVITY -->
         <section class="reveal" id="activity" data-section="Activity">
-          <div class="card pad">
-            <div class="activityHeader">
-              <span class="tag">Interactive Activity</span>
-              <h2 class="qTitle" style="margin-top:0;">
-                Classify each action as a Standard Precaution or a Transmission-Based Precaution
-              </h2>
-              <p class="lead" style="margin-top:0;">
-                Drag items from the left to the appropriate category on the right.
-                <span class="sr-only">Keyboard: focus an item and press S for Standard, T for Transmission, P to return to Items.</span>
-              </p>
-              <p class="lead" style="margin-top:0;font-size:14px;color:var(--muted2)">
-                Keyboard: focus an item and press <b>S</b> (Standard), <b>T</b> (Transmission), or <b>P</b> (back to Items).
-              </p>
-            </div>
+          <section class="reveal" id="activity" data-section="Activity">
+  <div class="card pad">
+    <div class="activityHeader">
+      <span class="tag">Interactive Activity</span>
+      <h2 class="qTitle" style="margin-top:0;">
+        Classify each action as a Standard Precaution or a Transmission-Based Precaution
+      </h2>
+      <p class="lead" style="margin-top:0;">
+        Drag items from the left to the appropriate category on the right.
+      </p>
+    </div>
 
-            <div class="activityGrid" aria-label="Classification activity">
-              <!-- Items -->
-              <div>
-                <div class="itemsTitle">Items to Sort</div>
-                <div class="itemList" id="pool" aria-label="Items to sort"></div>
-              </div>
+    <div class="activityGrid" aria-label="Classification activity">
+      <!-- Items -->
+      <div>
+        <div class="itemsTitle">Items to Sort</div>
+        <div class="itemList" id="pool" aria-label="Items to sort"></div>
+      </div>
 
-              <!-- Standard -->
-              <div class="dropZone" id="zoneStandard" aria-label="Standard Precautions drop zone">
-                <div class="dropZoneTitle">Standard Precautions</div>
-                <div class="itemList" id="bucketStandard"></div>
-              </div>
+      <!-- Standard -->
+      <div class="dropZone" id="zoneStandard" aria-label="Standard Precautions drop zone">
+        <div class="dropZoneTitle">Standard Precautions</div>
+        <div class="itemList" id="bucketStandard"></div>
+      </div>
 
-              <!-- Transmission -->
-              <div class="dropZone" id="zoneTransmission" aria-label="Transmission-Based Precautions drop zone">
-                <div class="dropZoneTitle">Transmission-Based Precautions</div>
-                <div class="itemList" id="bucketTransmission"></div>
-              </div>
-            </div>
+      <!-- Transmission -->
+      <div class="dropZone" id="zoneTransmission" aria-label="Transmission-Based Precautions drop zone">
+        <div class="dropZoneTitle">Transmission-Based Precautions</div>
+        <div class="itemList" id="bucketTransmission"></div>
+      </div>
+    </div>
 
-            <div class="activityFooter">
-              <button class="btnPrimary is-enabled" id="checkActivity" type="button">Check My Answers</button>
-              <div class="feedback" id="fbAct" role="status" aria-live="polite" hidden></div>
+    <div class="activityFooter">
+      <button class="btnPrimary is-enabled" id="checkActivity" type="button">Check My Answers</button>
+      <div class="feedback" id="fbAct" role="status" aria-live="polite" hidden></div>
 
-              <div class="markCompleteRow">
-                <button class="secondaryBtn" id="markCompleteBtn" type="button">Mark Complete</button>
-                <div class="statusPill" aria-live="polite">
-                  Status: <span id="statusText">incomplete</span> • Score: <span id="scoreText">0%</span>
-                </div>
-              </div>
+      <div class="markCompleteRow">
+        <button class="secondaryBtn" id="markCompleteBtn" type="button">Mark Complete</button>
+        <div class="statusPill" aria-live="polite">
+          Status: <span id="statusText">incomplete</span> • Score: <span id="scoreText">0%</span>
+        </div>
+      </div>
 
-              <p class="lead" style="margin-top:10px;font-size:13px;color:var(--muted2)">
-                Completion requires: (1) scroll to bottom and (2) pass quiz score ≥ 70%, then click “Mark Complete”.
-              </p>
-            </div>
-          </div>
-        </section>
+      <p class="lead" style="margin-top:10px;font-size:13px;color:var(--muted2)">
+        Completion requires: (1) scroll to bottom and (2) pass quiz score ≥ 70%, then click “Mark Complete”.
+      </p>
+    </div>
+  </div>
+</section>
+
 
         <!-- COMPLETE (end marker) -->
         <section class="reveal" id="complete" data-section="Complete">
