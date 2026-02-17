@@ -1,0 +1,1342 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bloodborne Pathogens Safety — eLearning</title>
+  <meta name="description" content="Modern continuous-scrolling Bloodborne Pathogens course aligned to OSHA 29 CFR 1910.1030." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root{
+      --bg: #f6f8fb;
+      --panel: #ffffff;
+      --panel2:#f1f7f6;
+      --ink:#0f172a;
+      --muted:#475569;
+      --muted2:#64748b;
+      --border: rgba(15,23,42,.10);
+      --shadow: 0 10px 30px rgba(15,23,42,.08);
+      --shadow2: 0 14px 44px rgba(15,23,42,.10);
+
+      --teal:#0ea5a4;
+      --teal2:#0b8a89;
+      --tealSoft: rgba(14,165,164,.12);
+      --danger:#ef4444;
+      --warn:#f59e0b;
+      --ok:#22c55e;
+
+      --r12: 12px;
+      --r16: 16px;
+      --r20: 20px;
+
+      --max: 1100px;
+      --navH: 70px;
+
+      --ease: cubic-bezier(.2,.8,.2,1);
+      --dur: 420ms;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(900px 450px at 40% 0%, rgba(14,165,164,.14), transparent 55%),
+        radial-gradient(700px 380px at 90% 4%, rgba(59,130,246,.10), transparent 55%),
+        var(--bg);
+      line-height:1.55;
+    }
+
+    a{color:var(--teal2); text-underline-offset: 3px}
+    a:focus-visible, button:focus-visible, [role="button"]:focus-visible, input:focus-visible{
+      outline:3px solid rgba(14,165,164,.35);
+      outline-offset:3px;
+      border-radius:12px;
+    }
+    .sr-only{
+      position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+      overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+    }
+
+    /* Top Nav */
+    .topbar{
+      position:fixed; inset:0 0 auto 0;
+      height:var(--navH);
+      display:flex; align-items:center;
+      background: rgba(255,255,255,.82);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--border);
+      z-index:1000;
+    }
+    .topbar__inner{
+      width:min(var(--max), calc(100% - 32px));
+      margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800;
+      letter-spacing:-.02em;
+    }
+    .brand__dot{
+      width:10px; height:10px; border-radius:999px; background:var(--teal);
+      box-shadow: 0 0 0 6px rgba(14,165,164,.12);
+    }
+
+    .topbar__right{
+      display:flex; align-items:center; gap:12px;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(14,165,164,.35);
+      background: rgba(14,165,164,.08);
+      color: #0b6f6e;
+      font-weight:700;
+      font-size:13px;
+      white-space:nowrap;
+    }
+    .avatar{
+      width:36px; height:36px; border-radius:999px;
+      overflow:hidden;
+      border:2px solid rgba(14,165,164,.25);
+      box-shadow: var(--shadow);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), transparent 55%),
+        linear-gradient(135deg, rgba(14,165,164,.55), rgba(59,130,246,.35));
+      display:grid; place-items:center;
+      font-weight:800; color:#0b3b3a;
+    }
+
+    /* Progress bar strip */
+    .progressStrip{
+      position:fixed; top:0; left:0; right:0;
+      height:4px; background: transparent;
+      z-index:1001;
+    }
+    .progressStrip > span{
+      display:block; height:100%; width:0%;
+      background: linear-gradient(90deg, var(--teal), #22c55e);
+      transition: width 120ms linear;
+    }
+
+    /* Layout */
+    main{
+      padding-top: calc(var(--navH) + 26px);
+      padding-bottom: 70px;
+    }
+    .wrap{
+      width:min(var(--max), calc(100% - 32px));
+      margin:0 auto;
+      display:grid;
+      grid-template-columns: 1fr 260px;
+      gap:28px;
+      align-items:start;
+    }
+    @media (max-width: 980px){
+      .wrap{ grid-template-columns: 1fr; }
+      .sideNav{ position:static !important; }
+    }
+
+    section{ margin: 0 0 26px; }
+    .hero{ padding: 22px 0 10px; }
+
+    .chips{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px; }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 12px;
+      background: var(--panel);
+      border:1px solid var(--border);
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+      font-weight:600;
+      font-size:13px;
+      color: var(--muted);
+    }
+    .chip svg{ width:16px; height:16px; color: var(--teal); }
+
+    h1{
+      margin:0;
+      font-size: clamp(34px, 4vw, 54px);
+      letter-spacing: -0.03em;
+      line-height:1.08;
+    }
+    .lead{
+      margin: 14px 0 0;
+      max-width: 75ch;
+      font-size: 16.5px;
+      color: var(--muted);
+    }
+
+    .card{
+      background: var(--panel);
+      border:1px solid var(--border);
+      border-radius: var(--r20);
+      box-shadow: var(--shadow);
+    }
+    .card--soft{
+      background: linear-gradient(180deg, rgba(14,165,164,.08), rgba(14,165,164,.03));
+      border:1px solid rgba(14,165,164,.22);
+    }
+    .pad{ padding: 22px; }
+
+    /* Video */
+    .videoFrame{
+      width:100%;
+      aspect-ratio: 16/9;
+      border-radius: 18px;
+      overflow:hidden;
+      background: #0b1220;
+      position:relative;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+    }
+    .videoFrame iframe{ width:100%; height:100%; border:0; }
+    .videoMeta{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(15,23,42,.08);
+      margin-top: 14px;
+      color: var(--muted2);
+      font-size: 13px;
+    }
+    .checkboxLine{
+      display:flex; align-items:center; gap:10px;
+      color: var(--muted);
+      font-weight:600;
+    }
+    .checkboxLine input{ width:18px; height:18px; accent-color: var(--teal); }
+
+    /* Tag */
+    .tag{
+      display:inline-flex; align-items:center;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-weight:800;
+      font-size: 13px;
+      background: rgba(14,165,164,.12);
+      color: #0b6f6e;
+    }
+    .qTitle{
+      margin: 10px 0 0;
+      font-size: 26px;
+      line-height:1.15;
+      letter-spacing:-.02em;
+    }
+
+    /* ===== Knowledge Check Options (Improved Selected UI) ===== */
+    .options{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      margin-top: 18px;
+    }
+    @media (max-width: 720px){
+      .options{ grid-template-columns: 1fr; }
+    }
+    .opt{
+      position: relative;
+      display:flex; gap:12px; align-items:center;
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(15,23,42,.12);
+      background: #fff;
+      box-shadow: 0 6px 18px rgba(15,23,42,.05);
+      cursor:pointer;
+      transition: transform 220ms var(--ease), box-shadow 220ms var(--ease), border-color 220ms var(--ease), background 220ms var(--ease);
+      user-select:none;
+      min-height: 68px;
+    }
+    .opt:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(15,23,42,.08);
+    }
+    .opt[data-selected="true"]{
+      border-color: rgba(14,165,164,.95);
+      background: rgba(14,165,164,.08);
+      box-shadow:
+        0 14px 34px rgba(14,165,164,.14),
+        0 0 0 2px rgba(14,165,164,.28);
+    }
+    .opt[data-selected="true"]::before{
+      content:"";
+      position:absolute;
+      left:0; top:10px; bottom:10px;
+      width:6px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #0ea5a4, #22c55e);
+    }
+    .optLetter{
+      width:34px; height:34px; border-radius:999px;
+      background: rgba(15,23,42,.05);
+      display:grid; place-items:center;
+      font-weight:900;
+      color: var(--muted);
+      flex:0 0 auto;
+    }
+    .opt[data-selected="true"] .optLetter{
+      background: #0b8a89;
+      color:#fff;
+      box-shadow: 0 10px 20px rgba(11,138,137,.18);
+    }
+    .optText{ font-weight:700; color: var(--ink); }
+
+    /* Submit button disabled until selection */
+    .btnPrimary{
+      width:100%;
+      margin-top: 18px;
+      border:0;
+      border-radius: 10px;
+      padding: 14px 16px;
+      background: rgba(14,165,164,.35); /* disabled look */
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 15px;
+      cursor:not-allowed;
+      transition: background 220ms var(--ease), transform 220ms var(--ease), filter 220ms var(--ease);
+    }
+    .btnPrimary.is-enabled{
+      background: #0b8a89; /* enabled/dark teal */
+      cursor:pointer;
+    }
+    .btnPrimary.is-enabled:hover{
+      filter: brightness(1.04);
+      transform: translateY(-1px);
+    }
+    .btnPrimary:disabled{ opacity: 1; }
+
+    .feedback{
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(15,23,42,.10);
+      background: rgba(15,23,42,.03);
+      color: var(--muted);
+      font-weight: 650;
+    }
+    .feedback.good{
+      border-color: rgba(34,197,94,.25);
+      background: rgba(34,197,94,.10);
+      color: #166534;
+    }
+    .feedback.bad{
+      border-color: rgba(239,68,68,.25);
+      background: rgba(239,68,68,.10);
+      color: #7f1d1d;
+    }
+
+    /* Quote block */
+    .quote{
+      padding: 22px;
+      border-radius: 18px;
+      background: rgba(14,165,164,.07);
+      border:1px solid rgba(14,165,164,.25);
+      display:grid;
+      gap:10px;
+    }
+    .quoteMark{ width:30px; height:30px; color: var(--teal); }
+    .quote p{
+      margin:0;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      line-height: 1.25;
+    }
+    .quote small{ color: var(--muted2); font-weight: 650; }
+
+    /* Stat card */
+    .statRow{
+      display:flex; gap:16px; align-items:center;
+      padding: 18px 22px;
+    }
+    .statIcon{
+      width:54px; height:54px;
+      border-radius: 16px;
+      background: rgba(239,68,68,.12);
+      border: 1px solid rgba(239,68,68,.25);
+      display:grid; place-items:center;
+      color: var(--danger);
+      flex: 0 0 auto;
+    }
+    .statNum{
+      font-size: 46px;
+      font-weight: 900;
+      letter-spacing: -.03em;
+      line-height:1;
+      margin:0;
+    }
+    .statText{
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-weight: 650;
+    }
+    .statSource{
+      margin: 0;
+      color: var(--muted2);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* ===== Activity (WIDE like your reference) ===== */
+    .activityHeader{
+      display:grid;
+      gap:6px;
+      margin-bottom: 12px;
+    }
+    .activityGrid{
+      display:grid;
+      grid-template-columns: 320px 1fr 1fr; /* wider left + large buckets */
+      gap:18px;
+      align-items:start;
+      margin-top: 16px;
+    }
+    @media (max-width: 1100px){
+      .activityGrid{ grid-template-columns: 1fr; }
+    }
+
+    .itemsTitle{
+      margin:6px 0 10px;
+      font-size:14px;
+      color:var(--muted);
+      font-weight:900;
+    }
+
+    .dropZone{
+      border: 2px dashed rgba(100,116,139,.45);
+      border-radius: 18px;
+      background: rgba(248,250,252,.75);
+      padding: 14px;
+      min-height: 260px; /* big targets */
+      transition: border-color 180ms var(--ease), background 180ms var(--ease), box-shadow 180ms var(--ease);
+    }
+    .dropZone h4{
+      margin: 0 0 12px;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 900;
+    }
+    .dropZone.dragOver{
+      border-color: rgba(14,165,164,.85);
+      background: rgba(14,165,164,.08);
+      box-shadow: 0 0 0 4px rgba(14,165,164,.12);
+    }
+
+    .itemList{
+      display:grid;
+      gap:12px;
+    }
+
+    .dndItem{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding: 14px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(15,23,42,.10);
+      background: #fff;
+      box-shadow: 0 8px 22px rgba(15,23,42,.06);
+      cursor: grab;
+    }
+    .dndItem:active{ cursor: grabbing; }
+    .dndLeft{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width: 0;
+    }
+    .grip{
+      width:36px; height:36px;
+      border-radius: 12px;
+      background: rgba(15,23,42,.05);
+      display:grid;
+      place-items:center;
+      color: var(--muted2);
+      flex:0 0 auto;
+    }
+    .dndText{
+      font-weight: 800;
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.2;
+      word-break: break-word;
+    }
+
+    /* small move buttons (keyboard fallback) */
+    .moveBtns{
+      display:flex;
+      gap:8px;
+      flex: 0 0 auto;
+      flex-wrap: nowrap;
+    }
+    .miniBtn{
+      border: 1px solid rgba(15,23,42,.12);
+      background: rgba(248,250,252,.92);
+      border-radius: 999px;
+      padding: 8px 10px;
+      font-weight: 900;
+      color: #334155;
+      cursor:pointer;
+      line-height:1;
+    }
+    .miniBtn:hover{
+      border-color: rgba(14,165,164,.35);
+      color:#0b6f6e;
+      background: rgba(14,165,164,.06);
+    }
+
+    /* Buttons inside activity */
+    .activityFooter{
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(15,23,42,.08);
+    }
+
+    /* Accordion */
+    .acc{
+      border-radius: 16px;
+      overflow:hidden;
+      border: 1px solid rgba(15,23,42,.10);
+      background: #fff;
+    }
+    .acc + .acc{ margin-top: 10px; }
+    .acc summary{
+      list-style:none;
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 14px 16px;
+      cursor:pointer;
+      font-weight: 900;
+      color: var(--ink);
+      user-select:none;
+    }
+    .acc summary::-webkit-details-marker{ display:none; }
+    .dot{
+      width:8px; height:8px; border-radius:999px;
+      background: var(--danger);
+      display:inline-block;
+      margin-right:10px;
+    }
+    .accBody{
+      padding: 0 16px 16px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .accBody h5{
+      margin: 12px 0 6px;
+      color: var(--ink);
+      font-size: 13px;
+    }
+    .accBody p{ margin:0; }
+
+    /* Completion */
+    .completeCard{
+      text-align:center;
+      padding: 28px 22px;
+      background: linear-gradient(180deg, rgba(14,165,164,.10), rgba(14,165,164,.02));
+      border:1px solid rgba(14,165,164,.28);
+      border-radius: 20px;
+      box-shadow: var(--shadow2);
+    }
+    .badgeRound{
+      width:60px; height:60px;
+      border-radius: 999px;
+      margin: 0 auto 10px;
+      background: rgba(14,165,164,.16);
+      border: 1px solid rgba(14,165,164,.30);
+      display:grid; place-items:center;
+      color: var(--teal2);
+    }
+    .completeCard h3{
+      margin: 8px 0 8px;
+      font-size: 40px;
+      letter-spacing: -.03em;
+    }
+    .completeCard p{
+      margin:0 auto;
+      max-width: 65ch;
+      color: var(--muted);
+      font-weight: 650;
+    }
+    .xpRow{
+      display:flex; align-items:center; justify-content:center; gap:12px;
+      margin-top: 16px;
+      flex-wrap:wrap;
+    }
+    .xpPill{
+      display:inline-flex; align-items:center; gap:8px;
+      background: rgba(14,165,164,.15);
+      border:1px solid rgba(14,165,164,.25);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-weight: 900;
+      color:#0b6f6e;
+    }
+    .barWrap{
+      width:min(520px, 100%);
+      margin: 16px auto 0;
+    }
+    .bar{
+      height:10px; border-radius: 999px;
+      background: rgba(15,23,42,.10);
+      overflow:hidden;
+    }
+    .bar > span{
+      display:block; height:100%; width:0%;
+      background: linear-gradient(90deg, var(--teal), #22c55e);
+      transition: width var(--dur) var(--ease);
+    }
+    .continueBtn{
+      margin-top: 18px;
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border:1px solid rgba(15,23,42,.10);
+      background: #0b8a89;
+      color:#fff;
+      font-weight: 900;
+      text-decoration:none;
+      box-shadow: 0 10px 26px rgba(14,165,164,.22);
+    }
+
+    /* Right side lesson nav */
+    .sideNav{
+      position: sticky;
+      top: calc(var(--navH) + 18px);
+    }
+    .sideCard{
+      border-radius: 18px;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(15,23,42,.10);
+      box-shadow: var(--shadow2);
+      padding: 12px;
+    }
+    .navList{
+      margin:0; padding:0;
+      list-style:none;
+      display:grid; gap:6px;
+    }
+    .navItem a{
+      display:flex; align-items:center; gap:10px;
+      padding: 10px 10px;
+      border-radius: 12px;
+      text-decoration:none;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 13px;
+    }
+    .navItem a:hover{ background: rgba(14,165,164,.08); color:#0b6f6e; }
+    .navItem a[aria-current="true"]{
+      background: rgba(14,165,164,.10);
+      color:#0b6f6e;
+    }
+    .bullet{
+      width:8px; height:8px; border-radius:999px;
+      background: rgba(100,116,139,.35);
+    }
+    .navItem a[aria-current="true"] .bullet{
+      background: var(--teal);
+      box-shadow: 0 0 0 6px rgba(14,165,164,.12);
+    }
+
+    /* Scroll reveal */
+    .reveal{ opacity:0; transform: translateY(14px); transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease); }
+    .reveal.in{ opacity:1; transform:none; }
+
+    /* Floating help button */
+    .helpBtn{
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      width: 44px; height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(15,23,42,.12);
+      background: rgba(255,255,255,.9);
+      box-shadow: var(--shadow2);
+      color: var(--muted);
+      display:grid; place-items:center;
+      cursor:pointer;
+      z-index:1002;
+    }
+    .helpBtn:hover{ color:#0b6f6e; border-color: rgba(14,165,164,.28); }
+    .toast{
+      position: fixed;
+      right: 16px;
+      bottom: 70px;
+      max-width: 360px;
+      background: rgba(255,255,255,.95);
+      border: 1px solid rgba(15,23,42,.12);
+      border-radius: 14px;
+      padding: 12px 12px;
+      box-shadow: var(--shadow2);
+      color: var(--muted);
+      font-weight: 650;
+      opacity:0;
+      transform: translateY(10px);
+      pointer-events:none;
+      transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+      z-index:1002;
+    }
+    .toast.show{ opacity:1; transform:none; }
+
+    @media print{
+      .topbar, .progressStrip, .sideNav, .helpBtn, .toast { display:none !important; }
+      body{ background:#fff; }
+      main{ padding-top: 0; }
+      .wrap{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progressStrip" aria-hidden="true"><span id="progressBar"></span></div>
+
+  <header class="topbar" role="banner">
+    <div class="topbar__inner">
+      <div class="brand" aria-label="Course title">
+        <span class="brand__dot" aria-hidden="true"></span>
+        <span>Bloodborne Pathogens Safety</span>
+      </div>
+
+      <div class="topbar__right">
+        <div class="pill" aria-live="polite" aria-atomic="true">
+          <span id="pct">0%</span> Complete
+        </div>
+        <div class="avatar" aria-label="Learner profile" title="Learner">
+          <span aria-hidden="true">👩‍⚕️</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" role="main">
+    <div class="wrap">
+      <!-- CONTENT -->
+      <div>
+        <!-- HERO -->
+        <section class="hero reveal" id="intro" data-section="Intro">
+          <div class="chips" aria-label="Course metadata">
+            <div class="chip">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="currentColor" stroke-width="2"/>
+              </svg>
+              <span>~12 min</span>
+            </div>
+            <div class="chip">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M16 11a4 4 0 1 0-8 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M4 20c1.6-3 4.3-5 8-5s6.4 2 8 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <span>Required — All Clinical Staff</span>
+            </div>
+          </div>
+
+          <h1>Module: Exposure Prevention &amp;<br/>Standard Precautions</h1>
+          <p class="lead">
+            Learn the critical protocols for minimizing exposure to bloodborne pathogens including proper PPE selection,
+            hand hygiene, and safe sharps handling — aligned to OSHA 29 CFR 1910.1030.
+          </p>
+        </section>
+
+        <!-- VIDEO -->
+        <section class="reveal" id="video" data-section="Video">
+          <div class="card pad">
+            <div class="videoFrame" aria-label="Training video">
+              <iframe
+                title="Bloodborne Pathogens Training Video"
+                src="https://www.youtube.com/embed/2R4n8k7tY4o"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+
+            <h2 style="margin:16px 0 6px; letter-spacing:-.02em;">Understanding the Chain of Infection</h2>
+            <div class="videoMeta">
+              <span aria-label="Video duration">4:32</span>
+              <label class="checkboxLine">
+                <input id="markVideo" type="checkbox" />
+                Mark as complete
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <!-- KNOWLEDGE CHECK -->
+        <section class="reveal" id="knowledge-check" data-section="Knowledge Check">
+          <div class="card pad">
+            <span class="tag">Knowledge Check</span>
+            <h2 class="qTitle">A healthcare worker sustains a needlestick injury. What is the <u>FIRST</u> action they should take?</h2>
+
+            <div class="options" role="radiogroup" aria-label="Question 1 options" data-qid="q1">
+              <div class="opt" role="radio" tabindex="0" aria-checked="false" data-opt="A">
+                <div class="optLetter" aria-hidden="true">A</div>
+                <div class="optText">File an incident report</div>
+              </div>
+              <div class="opt" role="radio" tabindex="0" aria-checked="false" data-opt="B">
+                <div class="optLetter" aria-hidden="true">B</div>
+                <div class="optText">Wash the area immediately with soap and water</div>
+              </div>
+              <div class="opt" role="radio" tabindex="0" aria-checked="false" data-opt="C">
+                <div class="optLetter" aria-hidden="true">C</div>
+                <div class="optText">Apply a bandage and continue working</div>
+              </div>
+              <div class="opt" role="radio" tabindex="0" aria-checked="false" data-opt="D">
+                <div class="optLetter" aria-hidden="true">D</div>
+                <div class="optText">Notify a supervisor</div>
+              </div>
+            </div>
+
+            <button class="btnPrimary" id="submitQ1" type="button" disabled>Submit Answer</button>
+            <div class="feedback" id="fbQ1" role="status" aria-live="polite" hidden></div>
+          </div>
+        </section>
+
+        <!-- READING -->
+        <section class="reveal" id="reading" data-section="Reading">
+          <h2 style="margin:0 0 10px; letter-spacing:-.02em; font-size:36px;">Understanding Standard Precautions</h2>
+          <p class="lead" style="margin-top:0;">
+            Standard Precautions represent the minimum infection prevention practices that apply to all patient care,
+            regardless of suspected or confirmed infection status.
+          </p>
+
+          <div class="quote card--soft" role="note" aria-label="Guidance quote">
+            <svg class="quoteMark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M9 7c-2 1-3 3-3 5 0 2 1 4 3 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M18 7c-2 1-3 3-3 5 0 2 1 4 3 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <p>“Treat all blood and body fluids as if they are infectious — this single principle prevents the majority of occupational exposures.”</p>
+            <small>— CDC Infection Control Guidelines (principle reflected in standard precautions)</small>
+          </div>
+
+          <h3 style="margin:18px 0 8px; letter-spacing:-.02em; font-size:24px;">Core Components</h3>
+          <p class="lead" style="margin:0;">
+            Standard Precautions include hand hygiene, PPE, safe injection practices, safe handling of contaminated
+            equipment, and respiratory hygiene/cough etiquette.
+          </p>
+
+          <div class="card" style="margin-top:16px;">
+            <div class="statRow">
+              <div class="statIcon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 9v5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M12 17h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M10.2 4.6 2.6 18a2 2 0 0 0 1.7 3h15.4a2 2 0 0 0 1.7-3L13.8 4.6a2 2 0 0 0-3.6 0Z"
+                        stroke="currentColor" stroke-width="2" />
+                </svg>
+              </div>
+              <div>
+                <p class="statNum">385,000</p>
+                <p class="statText">Needlestick injuries occur among U.S. healthcare workers annually</p>
+                <p class="statSource">Source: CDC/NIOSH (commonly cited estimate)</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ACTIVITY (Wide DnD) -->
+        <section class="reveal" id="activity" data-section="Activity">
+          <div class="card pad">
+            <div class="activityHeader">
+              <span class="tag">Interactive Activity</span>
+              <h2 class="qTitle" style="margin-top:0;">
+                Classify each action as a Standard Precaution or a Transmission-Based Precaution
+              </h2>
+              <p class="lead" style="margin-top:0;">
+                Drag items from the left into the appropriate category on the right. (Keyboard accessible via move buttons.)
+              </p>
+            </div>
+
+            <div class="activityGrid" aria-label="Classification activity">
+              <!-- Items -->
+              <div>
+                <div class="itemsTitle">Items to Sort</div>
+                <div class="itemList" id="pool" aria-label="Items to sort"></div>
+              </div>
+
+              <!-- Standard -->
+              <div class="dropZone" id="zoneStandard" data-zone="standard" aria-label="Standard Precautions drop zone">
+                <h4>Standard Precautions</h4>
+                <div class="itemList" id="bucketStandard"></div>
+              </div>
+
+              <!-- Transmission -->
+              <div class="dropZone" id="zoneTransmission" data-zone="transmission" aria-label="Transmission-Based Precautions drop zone">
+                <h4>Transmission-Based Precautions</h4>
+                <div class="itemList" id="bucketTransmission"></div>
+              </div>
+            </div>
+
+            <div class="activityFooter">
+              <button class="btnPrimary is-enabled" id="checkActivity" type="button">Check My Answers</button>
+              <div class="feedback" id="fbAct" role="status" aria-live="polite" hidden></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- REFERENCE -->
+        <section class="reveal" id="reference" data-section="Reference">
+          <div class="card pad">
+            <h2 style="margin:0; letter-spacing:-.02em; font-size:28px;">Key Pathogens at a Glance</h2>
+
+            <details class="acc" open>
+              <summary>
+                <span><span class="dot" style="background:#ef4444"></span>Hepatitis B (HBV)</span>
+                <span aria-hidden="true">⌄</span>
+              </summary>
+              <div class="accBody">
+                <h5>Transmission Routes</h5>
+                <p>Contact with infectious blood/fluids; commonly via needlestick injuries, mucous membrane exposure, or non-intact skin contact.</p>
+                <h5>Survivability on Surfaces</h5>
+                <p>Can remain infectious on environmental surfaces for up to 7 days under some conditions.</p>
+                <h5>Vaccine Availability</h5>
+                <p>Highly effective vaccine available; post-vaccination testing may be required by policy for some roles.</p>
+              </div>
+            </details>
+
+            <details class="acc">
+              <summary>
+                <span><span class="dot" style="background:#f97316"></span>Hepatitis C (HCV)</span>
+                <span aria-hidden="true">⌄</span>
+              </summary>
+              <div class="accBody">
+                <h5>Transmission Routes</h5>
+                <p>Primarily blood-to-blood contact; occupational exposure commonly via sharps injuries.</p>
+                <h5>Vaccine Availability</h5>
+                <p>No vaccine currently available; early evaluation and follow-up testing after exposure is critical.</p>
+              </div>
+            </details>
+
+            <details class="acc">
+              <summary>
+                <span><span class="dot" style="background:#eab308"></span>HIV</span>
+                <span aria-hidden="true">⌄</span>
+              </summary>
+              <div class="accBody">
+                <h5>Transmission Routes</h5>
+                <p>Blood or potentially infectious fluids contacting mucous membranes, non-intact skin, or percutaneous injury.</p>
+                <h5>Post-Exposure Prophylaxis (PEP)</h5>
+                <p>PEP should be evaluated urgently after exposure — many protocols recommend initiation as soon as possible.</p>
+              </div>
+            </details>
+
+            <details class="acc">
+              <summary>
+                <span><span class="dot" style="background:#22c55e"></span>Other Bloodborne Pathogens</span>
+                <span aria-hidden="true">⌄</span>
+              </summary>
+              <div class="accBody">
+                <h5>Examples</h5>
+                <p>Other pathogens can be present depending on patient population and exposure type. Follow your facility’s Exposure Control Plan.</p>
+              </div>
+            </details>
+          </div>
+        </section>
+
+        <!-- COMPLETE -->
+        <section class="reveal" id="complete" data-section="Complete">
+          <div class="completeCard" role="region" aria-label="Module completion">
+            <div class="badgeRound" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2 20 5v7c0 5-3.6 9-8 10-4.4-1-8-5-8-10V5l8-3Z" stroke="currentColor" stroke-width="2"/>
+                <path d="m8 12 2.2 2.2L16 8.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Module Complete!</h3>
+            <p>Excellent work! You’ve practiced exposure prevention and standard precautions — critical skills for maintaining safety in clinical environments.</p>
+
+            <div class="xpRow">
+              <div class="xpPill"><span aria-hidden="true">🏆</span><span>+ 150 XP</span></div>
+              <div style="color:var(--muted); font-weight:750;">2 of 6 modules completed</div>
+            </div>
+
+            <div class="barWrap" aria-label="Module progress">
+              <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="33">
+                <span id="moduleBar"></span>
+              </div>
+              <div style="margin-top:8px; color:var(--muted); font-weight:750;">33% of course complete</div>
+            </div>
+
+            <a class="continueBtn" href="#intro" id="continueBtn">
+              Continue to Module 3: Post-Exposure Response Protocols <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </section>
+      </div>
+
+      <!-- SIDE NAV -->
+      <aside class="sideNav" aria-label="Lesson navigation">
+        <div class="sideCard">
+          <ul class="navList" id="lessonNav">
+            <li class="navItem"><a href="#intro" data-link="Intro"><span class="bullet" aria-hidden="true"></span>Intro</a></li>
+            <li class="navItem"><a href="#video" data-link="Video"><span class="bullet" aria-hidden="true"></span>Video</a></li>
+            <li class="navItem"><a href="#knowledge-check" data-link="Knowledge Check"><span class="bullet" aria-hidden="true"></span>Knowledge<br/>Check</a></li>
+            <li class="navItem"><a href="#reading" data-link="Reading"><span class="bullet" aria-hidden="true"></span>Reading</a></li>
+            <li class="navItem"><a href="#activity" data-link="Activity"><span class="bullet" aria-hidden="true"></span>Activity</a></li>
+            <li class="navItem"><a href="#reference" data-link="Reference"><span class="bullet" aria-hidden="true"></span>Reference</a></li>
+            <li class="navItem"><a href="#complete" data-link="Complete"><span class="bullet" aria-hidden="true"></span>Complete</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <button class="helpBtn" id="helpBtn" type="button" aria-label="Help">?</button>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    /***********************
+     * Tracking (Standalone)
+     ***********************/
+    const STORE_KEY = "bbp_standalone_tracking_v2";
+    const state = loadState();
+
+    function loadState(){
+      try{
+        return JSON.parse(localStorage.getItem(STORE_KEY)) || {
+          startedAt: Date.now(),
+          sectionTimeMs: {},
+          currentSection: null,
+          sectionEnteredAt: null,
+          interactions: [],
+          quiz: { q1: { attempts:0, selected:null, correct:null } },
+          activity: { checked:false, correctCount:0, total:0, placement:{} }
+        };
+      }catch(e){
+        return { startedAt: Date.now(), sectionTimeMs:{}, currentSection:null, sectionEnteredAt:null, interactions:[], quiz:{ q1:{attempts:0, selected:null, correct:null } }, activity:{ checked:false, correctCount:0, total:0, placement:{} } };
+      }
+    }
+    function saveState(){ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }
+    function logInteraction(type, id, meta={}){
+      state.interactions.push({ t: Date.now(), type, id, meta });
+      saveState();
+    }
+
+    /* Scroll progress */
+    const progressBar = document.getElementById("progressBar");
+    const pctEl = document.getElementById("pct");
+    function updateProgress(){
+      const doc = document.documentElement;
+      const scrollTop = doc.scrollTop || document.body.scrollTop;
+      const scrollHeight = doc.scrollHeight - doc.clientHeight;
+      const p = scrollHeight > 0 ? Math.min(1, Math.max(0, scrollTop / scrollHeight)) : 0;
+      const pct = Math.round(p * 100);
+      progressBar.style.width = pct + "%";
+      pctEl.textContent = pct + "%";
+      return pct;
+    }
+    window.addEventListener("scroll", updateProgress, { passive:true });
+    updateProgress();
+
+    /* Side nav + time per section */
+    const sections = [...document.querySelectorAll("section[data-section]")];
+    const navLinks = [...document.querySelectorAll("#lessonNav a")];
+
+    function setCurrentNav(sectionName){
+      navLinks.forEach(a => a.setAttribute("aria-current", a.dataset.link === sectionName ? "true" : "false"));
+    }
+    function commitSectionTime(nextSectionName){
+      const now = Date.now();
+      if(state.currentSection && state.sectionEnteredAt){
+        const delta = now - state.sectionEnteredAt;
+        state.sectionTimeMs[state.currentSection] = (state.sectionTimeMs[state.currentSection] || 0) + delta;
+      }
+      state.currentSection = nextSectionName;
+      state.sectionEnteredAt = now;
+      saveState();
+    }
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          const name = entry.target.getAttribute("data-section");
+          setCurrentNav(name);
+          if(state.currentSection !== name) commitSectionTime(name);
+        }
+      });
+    }, { threshold: 0.55 });
+    sections.forEach(s => io.observe(s));
+    window.addEventListener("beforeunload", () => commitSectionTime(state.currentSection || "Intro"));
+
+    /* Reveal animations */
+    const revealIO = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("in"); });
+    }, { threshold: 0.18 });
+    document.querySelectorAll(".reveal").forEach(el => revealIO.observe(el));
+
+    /* Global click tracking */
+    document.addEventListener("click", (e)=>{
+      const t = e.target.closest("button,a,input,[role='radio']");
+      if(!t) return;
+      const id = t.id || t.getAttribute("href") || t.getAttribute("data-opt") || t.getAttribute("aria-label") || t.textContent.trim().slice(0,30);
+      logInteraction("click", id, { tag: t.tagName.toLowerCase(), section: state.currentSection });
+    }, true);
+
+    /* Help toast */
+    const helpBtn = document.getElementById("helpBtn");
+    const toast = document.getElementById("toast");
+    helpBtn.addEventListener("click", ()=>{
+      showToast("Tip: Drag items into the dashed boxes. You can also use the Pool/Standard/Transmission buttons for keyboard access.");
+      logInteraction("help", "helpBtn");
+    });
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(()=>toast.classList.remove("show"), 3200);
+    }
+
+    /* Video toggle */
+    document.getElementById("markVideo").addEventListener("change", (e)=>{
+      logInteraction("video_complete_toggle", "markVideo", { checked: e.target.checked });
+      showToast(e.target.checked ? "Video marked complete." : "Video unmarked.");
+    });
+
+    /***********************
+     * Knowledge Check Q1
+     * - Better selected visual
+     * - Submit enabled only after selection
+     ***********************/
+    const q1Correct = "B";
+    const q1Opts = [...document.querySelectorAll(".options[data-qid='q1'] .opt")];
+    const submitQ1 = document.getElementById("submitQ1");
+    const fbQ1 = document.getElementById("fbQ1");
+
+    // ensure disabled on load
+    submitQ1.disabled = true;
+    submitQ1.classList.remove("is-enabled");
+
+    function selectQ1(optEl){
+      q1Opts.forEach(o=>{
+        o.dataset.selected = "false";
+        o.setAttribute("aria-checked","false");
+      });
+      optEl.dataset.selected = "true";
+      optEl.setAttribute("aria-checked","true");
+
+      state.quiz.q1.selected = optEl.dataset.opt;
+      saveState();
+
+      // enable submit
+      submitQ1.disabled = false;
+      submitQ1.classList.add("is-enabled");
+
+      logInteraction("quiz_select", "q1", { selected: state.quiz.q1.selected });
+    }
+
+    q1Opts.forEach(opt=>{
+      opt.addEventListener("click", ()=>selectQ1(opt));
+      opt.addEventListener("keydown", (e)=>{
+        if(e.key === "Enter" || e.key === " "){
+          e.preventDefault();
+          selectQ1(opt);
+        }
+      });
+    });
+
+    submitQ1.addEventListener("click", ()=>{
+      if(!state.quiz.q1.selected){
+        fbQ1.hidden = false;
+        fbQ1.className = "feedback bad";
+        fbQ1.textContent = "Please select an answer before submitting.";
+        return;
+      }
+      state.quiz.q1.attempts += 1;
+      const correct = state.quiz.q1.selected === q1Correct;
+      state.quiz.q1.correct = correct;
+      saveState();
+
+      fbQ1.hidden = false;
+      fbQ1.className = "feedback " + (correct ? "good" : "bad");
+      fbQ1.textContent = correct
+        ? "Correct. First, wash the area immediately with soap and water. Then report and follow your facility’s exposure protocol."
+        : "Not quite. The first step is immediate decontamination: wash the area with soap and water (or flush mucous membranes). Then report and follow protocol.";
+
+      logInteraction("quiz_submit", "q1", {
+        question: "Needlestick: first action?",
+        selected: state.quiz.q1.selected,
+        correct,
+        attempts: state.quiz.q1.attempts
+      });
+    });
+
+    /***********************
+     * Activity: Real Drag & Drop + keyboard fallback buttons
+     ***********************/
+    const items = [
+      { id:"i1", text:"Hand hygiene between patients", correct:"standard" },
+      { id:"i2", text:"N95 respirator use", correct:"transmission" },
+      { id:"i3", text:"Gloves for blood contact", correct:"standard" },
+      { id:"i4", text:"Negative pressure room", correct:"transmission" },
+      { id:"i5", text:"Safe sharps disposal", correct:"standard" }
+    ];
+
+    const pool = document.getElementById("pool");
+    const bucketStandard = document.getElementById("bucketStandard");
+    const bucketTransmission = document.getElementById("bucketTransmission");
+    const zoneStandard = document.getElementById("zoneStandard");
+    const zoneTransmission = document.getElementById("zoneTransmission");
+
+    const checkActivity = document.getElementById("checkActivity");
+    const fbAct = document.getElementById("fbAct");
+
+    const placement = new Map(); // id -> "pool"|"standard"|"transmission"
+    let draggingId = null;
+
+    function renderItem(it){
+      const row = document.createElement("div");
+      row.className = "dndItem";
+      row.setAttribute("data-item", it.id);
+      row.setAttribute("draggable", "true");
+      row.setAttribute("role","group");
+      row.setAttribute("aria-label", it.text);
+
+      const left = document.createElement("div");
+      left.className = "dndLeft";
+
+      const grip = document.createElement("div");
+      grip.className = "grip";
+      grip.setAttribute("aria-hidden","true");
+      grip.innerHTML = "⋮⋮";
+
+      const label = document.createElement("div");
+      label.className = "dndText";
+      label.textContent = it.text;
+
+      left.append(grip, label);
+
+      const btns = document.createElement("div");
+      btns.className = "moveBtns";
+
+      const bPool = mkBtn("Pool", () => moveTo(it.id, "pool"));
+      const bStd  = mkBtn("Standard", () => moveTo(it.id, "standard"));
+      const bTrn  = mkBtn("Transmission", () => moveTo(it.id, "transmission"));
+
+      btns.append(bPool, bStd, bTrn);
+
+      row.append(left, btns);
+
+      // Drag events
+      row.addEventListener("dragstart", (e)=>{
+        draggingId = it.id;
+        e.dataTransfer.effectAllowed = "move";
+        try{ e.dataTransfer.setData("text/plain", it.id); }catch(_){}
+        logInteraction("activity_dragstart", it.id, { from: placement.get(it.id) });
+      });
+      row.addEventListener("dragend", ()=>{
+        draggingId = null;
+        clearZoneHighlights();
+      });
+
+      return row;
+
+      function mkBtn(txt, onClick){
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "miniBtn";
+        b.textContent = txt;
+        b.addEventListener("click", ()=>{
+          onClick();
+          logInteraction("activity_move", it.id, { to: placement.get(it.id) });
+        });
+        return b;
+      }
+    }
+
+    function mount(){
+      pool.innerHTML = "";
+      bucketStandard.innerHTML = "";
+      bucketTransmission.innerHTML = "";
+      items.forEach(it=>{
+        placement.set(it.id, "pool");
+        pool.append(renderItem(it));
+      });
+      state.activity.total = items.length;
+      state.activity.placement = Object.fromEntries(placement.entries());
+      saveState();
+    }
+    mount();
+
+    function moveTo(id, where){
+      placement.set(id, where);
+      const node = document.querySelector(`[data-item="${id}"]`);
+      if(!node) return;
+
+      if(where === "pool") pool.append(node);
+      if(where === "standard") bucketStandard.append(node);
+      if(where === "transmission") bucketTransmission.append(node);
+
+      state.activity.placement = Object.fromEntries(placement.entries());
+      saveState();
+    }
+
+    function setupDropZone(zoneEl, target){
+      zoneEl.addEventListener("dragover", (e)=>{
+        e.preventDefault();
+        zoneEl.classList.add("dragOver");
+        e.dataTransfer.dropEffect = "move";
+      });
+      zoneEl.addEventListener("dragleave", ()=>{
+        zoneEl.classList.remove("dragOver");
+      });
+      zoneEl.addEventListener("drop", (e)=>{
+        e.preventDefault();
+        zoneEl.classList.remove("dragOver");
+        const id = (e.dataTransfer && e.dataTransfer.getData("text/plain")) || draggingId;
+        if(!id) return;
+        moveTo(id, target);
+        logInteraction("activity_drop", id, { to: target });
+      });
+    }
+
+    function clearZoneHighlights(){
+      zoneStandard.classList.remove("dragOver");
+      zoneTransmission.classList.remove("dragOver");
+    }
+
+    setupDropZone(zoneStandard, "standard");
+    setupDropZone(zoneTransmission, "transmission");
+
+    checkActivity.addEventListener("click", ()=>{
+      let correctCount = 0;
+      items.forEach(it=>{
+        if(placement.get(it.id) === it.correct) correctCount++;
+      });
+
+      state.activity.checked = true;
+      state.activity.correctCount = correctCount;
+      state.activity.placement = Object.fromEntries(placement.entries());
+      saveState();
+
+      fbAct.hidden = false;
+      const ok = correctCount === items.length;
+      fbAct.className = "feedback " + (ok ? "good" : "bad");
+      fbAct.textContent = ok
+        ? "Nice work — all items are correctly classified."
+        : `You classified ${correctCount}/${items.length} correctly. Review Standard vs Transmission-Based precautions and try again.`;
+
+      logInteraction("activity_check", "classify", {
+        correctCount, total: items.length,
+        placement: Object.fromEntries(placement.entries())
+      });
+    });
+
+    // Completion bar inside completion card
+    document.getElementById("moduleBar").style.width = "33%";
+
+    // On load, set initial section time
+    if(!state.currentSection){
+      state.currentSection = "Intro";
+      state.sectionEnteredAt = Date.now();
+      saveState();
+    }
+    setCurrentNav(state.currentSection || "Intro");
+  </script>
+</body>
+</html>
